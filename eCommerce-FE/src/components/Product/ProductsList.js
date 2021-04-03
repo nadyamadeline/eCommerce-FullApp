@@ -6,25 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { productLists } from "../../redux/action/productListAction";
 
 function ProductCard() {
-  // const [product, setProduct] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(false);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const { data } = await axios.get("/api/products");
-  //       setLoading(false);
-  //       setProduct(data);
-  //     } catch (err) {
-  //       setError(err.message);
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productReducer);
 
@@ -33,7 +14,7 @@ function ProductCard() {
   }, [dispatch]);
 
   return (
-    <div className="products">
+    <div className="product-container">
       {productList.loading ? (
         <p>Loading...</p>
       ) : productList.error ? (
@@ -42,8 +23,15 @@ function ProductCard() {
         productList.products &&
         productList.products.map((product, index) => (
           <Link to={`/products/${product._id}`}>
-            <div key={index} className="product-img">
-              <img src={product.image} alt={product.name} />
+            <div className="products">
+              <div key={index} className="product-img">
+                <img src={product.image} alt={product.name} />
+              </div>
+              <div className="product-info">
+                <p>{product.name}</p>
+                <p>{product.rating}</p>
+                <p>{product.price}</p>
+              </div>
             </div>
           </Link>
         ))

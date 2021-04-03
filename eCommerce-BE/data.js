@@ -1,10 +1,3 @@
-// import img1 from "./assets/img1.jpeg";
-// import img2 from "./assets/img2.jpeg";
-// import img3 from "./assets/img3.jpeg";
-// import img4 from "./assets/img4.jpeg";
-// import img5 from "./assets/img5.jpeg";
-// import uuid from "react-uuid";
-
 const data = {
   products: [
     {
@@ -13,6 +6,7 @@ const data = {
       category: "Furniture",
       image: "/images/img1.jpeg",
       price: 500,
+      countInStock: 10,
       numReview: 3,
       brand: "Vinotti",
       rating: 4.7,
@@ -24,6 +18,7 @@ const data = {
       category: "Furniture",
       image: "/images/img2.jpeg",
       price: 200,
+      countInStock: 8,
       numReview: 5,
       brand: "Cellini",
       rating: 4.7,
@@ -35,6 +30,7 @@ const data = {
       category: "Furniture",
       image: "/images/img3.jpeg",
       price: 500,
+      countInStock: 7,
       numReview: 2,
       brand: "Jakomo",
       rating: 4.9,
@@ -46,6 +42,7 @@ const data = {
       category: "Furniture",
       image: "/images/img4.jpeg",
       price: 50,
+      countInStock: 0,
       numReview: 20,
       brand: "Lumiere",
       rating: 4.5,
@@ -57,6 +54,7 @@ const data = {
       category: "Tableware",
       image: "/images/img5.jpeg",
       price: 10,
+      countInStock: 25,
       numReview: 27,
       brand: "Bellagio",
       rating: 4.3,
