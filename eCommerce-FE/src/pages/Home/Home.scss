@@ -1,0 +1,15 @@
+.jumbotron {
+  height: 100vh;
+  background-image: url("../../assets/img8.jpeg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  .tagline {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 13rem;
+  }
+}
+.featured {
+  text-align: center;
+}
