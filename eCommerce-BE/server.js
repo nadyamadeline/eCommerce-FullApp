@@ -4,7 +4,8 @@ const app = express();
 
 // display product detail
 app.get("/api/products/:id", (req, res) => {
-  const product = data.products.find((x) => x._id == req.params.id);
+  const product = data.products.find((x) => x._id === Number(req.params.id));
+  // need to convert req.params.id to number as it returns a string while our id is denoted as number
   if (product) {
     res.send(product);
   } else {

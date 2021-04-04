@@ -1,32 +1,65 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Product.scss";
 import { productDetail } from "../../redux/action/productDetailAction";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 function ProductDetail() {
+  // get product detail
   const { id } = useParams();
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.productDetailReducer);
+  const productDetails = useSelector((state) => state.productDetailReducer);
+  const product = useSelector((state) => state.productDetailReducer.product);
+
   useEffect(() => {
     dispatch(productDetail(id));
   }, [dispatch, id]);
 
+  // set up add to cart
+  const [count, setCount] = useState(1);
+  const handleAddQty = (max) => {
+    count < max ? setCount(count + 1) : setCount(max);
+  };
+  const handleMinusQty = () => {
+    count > 1 ? setCount(count - 1) : setCount(1);
+  };
+
+  const history = useHistory();
+  const handleAddToCart = () => {
+    history.push(`/cart/${id}?qty=${count}`);
+  };
+
   return (
     <div className="productDetail">
-      {product.loading ? (
+      {productDetails.loading ? (
         <p>Loading...</p>
-      ) : product.error ? (
-        <p>{product.error}</p>
+      ) : productDetails.error ? (
+        <p>{productDetails.error}</p>
       ) : (
         <div>
           <img
-            src={product.product.image}
+            src={product.image}
             style={{ width: "250px", height: "250px" }}
           />
-          {product.product.countInStock > 0 ? (
+          {product.countInStock > 0 ? (
             <div>
-              <button>Add to Cart</button>
+              <p>In stock</p>
+            </div>
+          ) : (
+            <div>
+              <p>Item unavailable</p>
+            </div>
+          )}
+          {product.countInStock > 0 ? (
+            <div>
+              <div>
+                <button onClick={handleMinusQty}>-</button>
+                <p>{count}</p>
+                <button onClick={() => handleAddQty(product.countInStock)}>
+                  +
+                </button>
+              </div>
+              <button onClick={handleAddToCart}>Add to Cart</button>
             </div>
           ) : (
             ""
