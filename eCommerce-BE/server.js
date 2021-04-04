@@ -2,8 +2,13 @@ import express from "express";
 import mongoose from "mongoose";
 import UserRouter from "./routers/user.js"; // in server-side programming, we need to append the .js extension
 import ProductRouter from "./routers/product.js";
+import dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/canopyco", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
