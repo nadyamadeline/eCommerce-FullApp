@@ -1,6 +1,14 @@
 import express from "express";
+import mongoose from "mongoose";
 import data from "./data.js"; // in server-side programming, we need to append the .js extension
+import UserRouter from "./routers/user.js";
+
 const app = express();
+mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/canopyco", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 
 // display product detail
 app.get("/api/products/:id", (req, res) => {
@@ -16,14 +24,19 @@ app.get("/api/products/:id", (req, res) => {
 app.get("/api/products", (req, res) => {
   res.send(data.products);
 });
+// show sample user
+app.use("/api/users", UserRouter);
 
 // set the root of our server
 app.get("/", (req, res) => {
   res.send("Server is ready");
 });
 
+// display error message (error catcher)
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message });
+});
 const port = process.env.PORT || 5000;
-
 // listening on port 5000
 app.listen(port, () => {
   console.log(`Serve at http://localhost:${port}`);
