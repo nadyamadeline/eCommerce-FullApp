@@ -1,28 +1,83 @@
 import React, { useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/action/cartAction";
 import "./Cart.scss";
 
 function Cart() {
-  const { id } = useParams();
-  const location = useLocation().search.split("=");
-  const qty = location[1];
-
-  //   console.log(`qty`, qty);
-  //   console.log(`params`, id);
-
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (id) {
-      dispatch(addToCart(id, qty));
-    }
-  }, [dispatch, id, qty]);
+
+  const cart = useSelector((state) => state.cart.cartItem);
+
+  const handleDeleteItem = (id) => {};
+
+  const history = useHistory();
+  const handleCheckOut = () => {
+    history.push(`/signin?redirect=shippping`);
+  };
+
   return (
     <div className="cart">
-      <h1>Cart Screen</h1>
-      <p>Product ID: {id}</p>
-      <p>Quantity: {qty}</p>
+      <h1>Shopping Cart</h1>
+      <div className="cart-header">
+        <p>Item</p>
+        <p>Quantity</p>
+        <p>Price</p>
+        <p>Subtotal</p>
+      </div>
+      {cart.length === 0 ? (
+        <p>Cart is empty</p>
+      ) : (
+        cart.map((item, index) => (
+          <div key={index} className="cart-items">
+            <div className="cart-image">
+              <img
+                src={item.image}
+                alt={item.name}
+                style={{ width: "250px", height: "250px" }}
+              />
+              <p>{item.name}</p>
+            </div>
+            <div className="cart-item-qty">
+              <button
+                onClick={() =>
+                  dispatch(
+                    addToCart(item.product, Math.max(Number(item.qty) - 1, 0))
+                  )
+                }
+              >
+                -
+              </button>
+              <p>{Number(item.qty)}</p>
+              <button
+                onClick={() =>
+                  dispatch(
+                    addToCart(
+                      item.product,
+                      Math.min(Number(item.qty) + 1, item.countInStock)
+                    )
+                  )
+                }
+              >
+                +
+              </button>
+            </div>
+            <div>${item.price}</div>
+            <div>${item.price * item.qty}</div>
+            <div>
+              <button onClick={handleDeleteItem}>Delete</button>
+            </div>
+          </div>
+        ))
+      )}
+      <div className="cart-total">
+        <h3>Total:</h3>
+        <p>{cart.reduce((a, c) => a + c.qty, 0)} items</p>
+        <p>${cart.reduce((a, c) => a + c.price * c.qty, 0)}</p>
+      </div>
+      <div className="cart-checkout">
+        <button onClick={handleCheckOut}>Checkout</button>
+      </div>
     </div>
   );
 }

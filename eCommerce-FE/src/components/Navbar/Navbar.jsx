@@ -24,12 +24,14 @@ function Navbar() {
         <p>New</p>
       </div>
       <div className="menu">
-        <p>
-          Cart{" "}
-          <span style={{ color: "white", backgroundColor: "red" }}>
-            {totalItem}
-          </span>
-        </p>
+        <Link to="/cart">
+          <p>
+            Cart{" "}
+            <span style={{ color: "white", backgroundColor: "red" }}>
+              {totalItem}
+            </span>
+          </p>
+        </Link>
         <p>Log In</p>
       </div>
     </div>

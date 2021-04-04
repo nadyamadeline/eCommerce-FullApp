@@ -1,3 +1,27 @@
 .cart {
-  padding-top: 10rem;
+  padding-top: 5rem;
+}
+.cart-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  //   width: 70%;
+}
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+}
+.cart-item-qty {
+  display: flex;
+  align-items: center;
+}
+.cart-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.5rem 0;
+}
+.cart-checkout {
+  display: flex;
+  justify-content: flex-end;
 }

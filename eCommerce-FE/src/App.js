@@ -1,6 +1,7 @@
 import React from "react";
 import Home from "./pages/Home/Home";
 import "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import ProductDetail from "./pages/Product/ProductDetail";
 import Cart from "./pages/Cart/Cart";
@@ -14,8 +15,9 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/products/:id" component={ProductDetail} />
-          <Route path="/cart/:id" component={Cart} />
+          <Route path="/cart/" component={Cart} />
         </Switch>
+        <Footer />
       </div>
     </Router>
   );
