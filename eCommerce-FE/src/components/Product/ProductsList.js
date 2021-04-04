@@ -22,8 +22,8 @@ function ProductCard() {
       ) : (
         productList.products &&
         productList.products.map((product, index) => (
-          <Link to={`/products/${product._id}`}>
-            <div className="products" key={index}>
+          <Link to={`/products/${product._id}`} key={index}>
+            <div className="products">
               <div className="product-img">
                 <img src={product.image} alt={product.name} />
               </div>

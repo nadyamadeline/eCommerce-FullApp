@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import React from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/action/cartAction";
+import { addToCart, removeFromCart } from "../../redux/action/cartAction";
 import "./Cart.scss";
 
 function Cart() {
@@ -9,7 +9,9 @@ function Cart() {
 
   const cart = useSelector((state) => state.cart.cartItem);
 
-  const handleDeleteItem = (id) => {};
+  const handleDeleteItem = (id) => {
+    dispatch(removeFromCart(id));
+  };
 
   const history = useHistory();
   const handleCheckOut = () => {
@@ -41,23 +43,18 @@ function Cart() {
             <div className="cart-item-qty">
               <button
                 onClick={() =>
-                  dispatch(
-                    addToCart(item.product, Math.max(Number(item.qty) - 1, 0))
-                  )
+                  dispatch(addToCart(item.product, Number(item.qty) - 1))
                 }
+                disabled={item.qty <= 1}
               >
                 -
               </button>
               <p>{Number(item.qty)}</p>
               <button
                 onClick={() =>
-                  dispatch(
-                    addToCart(
-                      item.product,
-                      Math.min(Number(item.qty) + 1, item.countInStock)
-                    )
-                  )
+                  dispatch(addToCart(item.product, Number(item.qty) + 1))
                 }
+                disabled={item.qty >= item.countInStock}
               >
                 +
               </button>
@@ -65,7 +62,9 @@ function Cart() {
             <div>${item.price}</div>
             <div>${item.price * item.qty}</div>
             <div>
-              <button onClick={handleDeleteItem}>Delete</button>
+              <button onClick={() => handleDeleteItem(item.product)}>
+                Delete
+              </button>
             </div>
           </div>
         ))
