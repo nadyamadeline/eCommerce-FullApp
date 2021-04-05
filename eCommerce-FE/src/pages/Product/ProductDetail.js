@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Product.scss";
 import { productDetail } from "../../redux/action/productDetailAction";
 import { useHistory, useParams } from "react-router-dom";
+import { addToCart } from "../../redux/action/cartAction";
 
 function ProductDetail() {
   // get product detail
@@ -25,8 +26,8 @@ function ProductDetail() {
   };
 
   const history = useHistory();
-  const handleAddToCart = () => {
-    history.push(`/cart/${id}?qty=${count}`);
+  const handleAddToCart = (item, qty) => {
+    dispatch(addToCart(item, qty));
   };
 
   return (
@@ -59,7 +60,9 @@ function ProductDetail() {
                   +
                 </button>
               </div>
-              <button onClick={handleAddToCart}>Add to Cart</button>
+              <button onClick={() => handleAddToCart(product._id, count)}>
+                Add to Cart
+              </button>
             </div>
           ) : (
             ""

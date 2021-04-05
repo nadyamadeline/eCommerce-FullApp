@@ -1,15 +1,21 @@
 import React from "react";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { signOut } from "../../redux/action/loginAction";
 
 function Navbar() {
   const cart = useSelector((state) => state.cart.cartItem);
+  const userInfo = useSelector((state) => state.login.user);
 
   let totalItem = 0;
   cart.map((x) => (totalItem += Number(x.qty)));
   // console.log(totalItem);
 
+  const dispatch = useDispatch();
+  const handleSignOut = () => {
+    dispatch(signOut());
+  };
   return (
     <div className="navbar">
       <Link to="/" style={{ textDecoration: "none", color: "black" }}>
@@ -32,7 +38,22 @@ function Navbar() {
             </span>
           </p>
         </Link>
-        <p>Log In</p>
+        {userInfo ? (
+          <div>
+            <Link to="#">
+              <p>{userInfo.name} v</p>
+            </Link>
+            <ul>
+              <Link to="/" onClick={handleSignOut}>
+                Sign Out
+              </Link>
+            </ul>
+          </div>
+        ) : (
+          <Link to="/signin">
+            <p>Log In</p>
+          </Link>
+        )}
       </div>
     </div>
   );
