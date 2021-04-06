@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Product.scss";
 import { productDetail } from "../../redux/action/productDetailAction";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { addToCart } from "../../redux/action/cartAction";
 
 function ProductDetail() {
@@ -25,7 +25,6 @@ function ProductDetail() {
     count > 1 ? setCount(count - 1) : setCount(1);
   };
 
-  const history = useHistory();
   const handleAddToCart = (item, qty) => {
     dispatch(addToCart(item, qty));
   };
@@ -40,6 +39,7 @@ function ProductDetail() {
         <div>
           <img
             src={product.image}
+            alt={product.name}
             style={{ width: "250px", height: "250px" }}
           />
           {product.countInStock > 0 ? (

@@ -1,57 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { signOut } from "../../redux/action/loginAction";
+import { useSelector } from "react-redux";
+import Hero from "./Hero";
 
 function Navbar() {
   const cart = useSelector((state) => state.cart.cartItem);
   const userInfo = useSelector((state) => state.login.user);
 
-  let totalItem = 0;
-  cart.map((x) => (totalItem += Number(x.qty)));
-  // console.log(totalItem);
+  let totalItem = cart.reduce((a, c) => a + Number(c.qty), 0);
 
-  const dispatch = useDispatch();
-  const handleSignOut = () => {
-    dispatch(signOut());
+  // scroll effect
+  const [scroll, setScroll] = useState(false);
+  const changeBackground = () => {
+    if (window.scrollY > 100) {
+      setScroll(true);
+    } else {
+      setScroll(false);
+    }
   };
+
+  window.addEventListener("scroll", changeBackground);
   return (
-    <div className="navbar">
+    <div className={scroll ? "navbar-scroll" : "navbar"}>
       <Link to="/" style={{ textDecoration: "none", color: "black" }}>
         <div className="logo">
           <p>canopy &amp; co.</p>
         </div>
       </Link>
       <div className="nav-tabs">
-        <p>Shop</p>
-        <p>About</p>
-        <p>Featured</p>
-        <p>New</p>
+        <h2>Shop</h2>
+        <h2>About</h2>
+        <h2>Featured</h2>
+        <h2>New</h2>
       </div>
       <div className="menu">
-        <Link to="/cart">
-          <p>
-            Cart{" "}
-            <span style={{ color: "white", backgroundColor: "red" }}>
-              {totalItem}
-            </span>
-          </p>
+        <Link to="/cart" style={{ textDecoration: "none" }}>
+          <h2 className="nav-cart">
+            Cart <span>{totalItem}</span>
+          </h2>
         </Link>
+
         {userInfo ? (
-          <div>
-            <Link to="#">
-              <p>{userInfo.name} v</p>
-            </Link>
-            <ul>
-              <Link to="/" onClick={handleSignOut}>
-                Sign Out
-              </Link>
-            </ul>
-          </div>
+          <Hero />
         ) : (
-          <Link to="/signin">
-            <p>Log In</p>
+          <Link to="/signin" style={{ textDecoration: "none" }}>
+            <h2 className="nav-login">Log In</h2>
           </Link>
         )}
       </div>

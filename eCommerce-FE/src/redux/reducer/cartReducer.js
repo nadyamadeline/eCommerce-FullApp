@@ -10,12 +10,12 @@ const cartReducer = (state = initalState, action) => {
     case CART_ADD_ITEM:
       const item = action.payload;
       // check if item already exist in the cart
-      const existItem = state.cartItem.find((x) => x.product == item.product);
+      const existItem = state.cartItem.find((x) => x.product === item.product);
       if (existItem) {
         return {
           ...state,
           cartItem: state.cartItem.map((x) =>
-            x.product == existItem.product ? item : x
+            x.product === existItem.product ? item : x
           ),
         };
       } else {
@@ -27,7 +27,7 @@ const cartReducer = (state = initalState, action) => {
     case CARD_DELETE_ITEM:
       return {
         ...state,
-        cartItem: state.cartItem.filter((x) => x.product != action.payload),
+        cartItem: state.cartItem.filter((x) => x.product !== action.payload),
       };
     default:
       return state;

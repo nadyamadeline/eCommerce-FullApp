@@ -12,7 +12,6 @@ function Login() {
   const redirect = location.search ? location.search.split("=")[1] : "/";
   const userInfo = useSelector((state) => state.login.user);
 
-  console.log(location);
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
@@ -26,7 +25,7 @@ function Login() {
     if (userInfo) {
       history.push(redirect);
     }
-  }, [userInfo]);
+  }, [userInfo, history, redirect]);
   return (
     <div className="login">
       <form onSubmit={submitHandler}>

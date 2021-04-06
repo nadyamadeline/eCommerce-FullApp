@@ -1,0 +1,73 @@
+$black: #404142;
+$darkbrown: #4c4036;
+$lightbrown: #77706a;
+$grey: #d8d7d4;
+$beige: #e3d6cb;
+$cream: #fef9f3;
+$success: #20a020;
+$successBkgr: #eeffe0;
+$danger: #a02020;
+$dangerBkgr: #ffe0e0;
+$info: #2020a0;
+$infoBkgr: #e0e0ff;
+
+.hero-logged-in {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  li {
+    float: left;
+  }
+
+  .hero-profile-container {
+    display: flex;
+    align-items: center;
+  }
+  li p,
+  .hero-dropbtn {
+    color: $black;
+    font-size: 18px;
+    // line-height: 25.2px;
+    padding-left: 16px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  li p:hover,
+  .hero-dropdown:hover .dropbtn {
+    cursor: pointer;
+  }
+
+  li.hero-dropdown {
+    display: inline-block;
+  }
+
+  .hero-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .hero-dropdown-content p {
+    color: $black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .hero-dropdown-content p:hover {
+    background-color: #e7e7e7;
+  }
+
+  .hero-dropdown:hover .hero-dropdown-content {
+    display: block;
+  }
+}

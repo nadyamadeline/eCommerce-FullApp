@@ -1,35 +1,158 @@
 @import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+
 * {
   margin: 0;
 }
+
+$black: #404142;
+$darkbrown: #4c4036;
+$lightbrown: #77706a;
+$grey: #d8d7d4;
+$beige: #e3d6cb;
+$cream: #fef9f3;
+$success: #20a020;
+$successBkgr: #eeffe0;
+$danger: #a02020;
+$dangerBkgr: #ffe0e0;
+$info: #2020a0;
+$infoBkgr: #e0e0ff;
+
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // background-color: tomato;
+  background-color: transparent;
   position: fixed;
+  top: 0;
+  transition-timing-function: ease-in;
+  transition: all 0.5s;
   z-index: 10;
   width: 100%;
-  // margin-bottom: 5rem;
 
   .logo {
     padding: 0.5rem 0 1rem;
-    margin-left: 3rem;
+    margin-left: 4rem;
     font-family: "Kiwi Maru";
     font-size: 1.75rem;
+    color: $darkbrown;
   }
   .nav-tabs {
     display: flex;
-    p {
+    font-family: "Nunito";
+    font-weight: 700;
+    h2 {
+      font-size: 18px;
+      color: $black;
       margin-left: 2rem;
       margin-right: 2rem;
+      cursor: pointer;
+    }
+    :hover {
+      color: $lightbrown;
+      transition-duration: 300ms;
     }
   }
   .menu {
-    margin-right: 3rem;
+    margin-right: 3.5rem;
     display: flex;
-    p {
-      margin-left: 2rem;
+    font-family: "Nunito";
+    h2 {
+      padding-left: 2rem;
+      font-size: 18px;
+      font-weight: 700;
     }
+  }
+
+  .nav-cart {
+    color: $darkbrown;
+    font-size: 18px;
+    font-family: "Nunito";
+    font-weight: 700;
+    span {
+      background-color: rgb(235, 57, 57);
+      color: $cream;
+      padding: 2px 6px;
+      border-radius: 50px;
+      font-size: 11px;
+      vertical-align: top;
+    }
+  }
+  :hover {
+    color: $lightbrown;
+    transition-duration: 300ms;
+  }
+
+  .nav-login {
+    color: $darkbrown;
+    font-size: 18px;
+    font-family: "Nunito";
+    font-weight: 700;
+  }
+}
+
+.navbar-scroll {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  transition-timing-function: ease-in;
+  transition: all 0.5s;
+  z-index: 10;
+  width: 100%;
+  box-shadow: 0px 4px 10px rgba(33, 68, 87, 0.3);
+  background-color: #f6f1eb;
+
+  .logo {
+    padding: 0.5rem 0 1rem;
+    margin-left: 4rem;
+    font-family: "Kiwi Maru";
+    font-size: 1.75rem;
+    color: $black;
+  }
+  .nav-tabs {
+    display: flex;
+    font-family: "Nunito";
+    font-weight: 700;
+    h2 {
+      font-size: 18px;
+      color: $black;
+      margin-left: 2rem;
+      margin-right: 2rem;
+      cursor: pointer;
+    }
+  }
+  .menu {
+    margin-right: 3.5rem;
+    display: flex;
+    font-family: "Nunito";
+    h2 {
+      padding-left: 2rem;
+      font-weight: 700;
+    }
+  }
+
+  .nav-cart {
+    color: $black;
+    font-size: 18px;
+    font-family: "Nunito";
+    font-weight: 700;
+    span {
+      background-color: rgb(235, 57, 57);
+      color: $cream;
+      padding: 2px 6px;
+      border-radius: 50px;
+      font-size: 11px;
+      vertical-align: top;
+    }
+  }
+
+  .nav-login {
+    color: $black;
+    font-family: "Nunito";
+    font-weight: 700;
+    font-size: 18px;
   }
 }
