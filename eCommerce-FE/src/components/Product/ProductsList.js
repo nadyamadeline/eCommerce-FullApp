@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./ProductList.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { productLists } from "../../redux/action/productListAction";
+import ReactStars from "react-stars";
 
 function ProductCard() {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ function ProductCard() {
   }, [dispatch]);
 
   return (
-    <div className="product-container">
+    <div className="products-container">
       {productList.loading ? (
         <p>Loading...</p>
       ) : productList.error ? (
@@ -21,15 +22,32 @@ function ProductCard() {
       ) : (
         productList.products &&
         productList.products.map((product, index) => (
-          <Link to={`/products/${product._id}`} key={index}>
+          <Link
+            to={`/products/${product._id}`}
+            key={index}
+            style={{ textDecoration: "none" }}
+          >
             <div className="products">
               <div className="product-img">
                 <img src={product.image} alt={product.name} />
               </div>
               <div className="product-info">
-                <p>{product.name}</p>
-                <p>{product.rating}</p>
-                <p>{product.price}</p>
+                <p className="product-name" style={{ fontSize: "1.15rem" }}>
+                  {product.name.toUpperCase()}
+                </p>
+                <div className="product-rating">
+                  <ReactStars
+                    count={5}
+                    value={product.rating}
+                    size={16}
+                    color2={"#fff200"}
+                    edit={false}
+                  />
+                  <p>
+                    {product.rating} ({product.numReviews} sold)
+                  </p>
+                </div>
+                <p className="product-price">${product.price}</p>
               </div>
             </div>
           </Link>

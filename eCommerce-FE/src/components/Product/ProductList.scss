@@ -1,12 +1,54 @@
-.product-container {
+$black: #404142;
+$darkbrown: #4c4036;
+$lightbrown: #77706a;
+$grey: #d8d7d4;
+$beige: #e3d6cb;
+$cream: #fef9f3;
+$success: #20a020;
+$successBkgr: #eeffe0;
+$danger: #a02020;
+$dangerBkgr: #ffe0e0;
+$info: #2020a0;
+$infoBkgr: #e0e0ff;
+
+.products-container {
   display: flex;
   flex-wrap: wrap;
   margin: 0 2rem;
   justify-content: space-between;
+  color: black;
+  text-align: left;
+  padding-bottom: 2rem;
+}
+.products {
+  background-color: #ffffff;
+  margin-top: 2rem;
+  padding: 0.15rem;
 }
 .product-img {
   img {
     width: 250px;
     height: 250px;
   }
+}
+.product-info {
+  height: 100%;
+  margin-left: 0.5rem;
+  p {
+    color: $black;
+    font-family: "Nunito";
+    line-height: 2rem;
+  }
+}
+.product-rating {
+  display: flex;
+  align-items: center;
+  // justify-content: space-between;
+  p {
+    padding-left: 0.5rem;
+  }
+}
+
+.product-price {
+  font-weight: 700;
 }

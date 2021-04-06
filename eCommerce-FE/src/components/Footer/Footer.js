@@ -4,7 +4,7 @@ import "./Footer.scss";
 function Footer() {
   return (
     <div className="footer">
-      <p>canopy &amp; co. 2021</p>
+      <p>&copy; 2021 Canopy &amp; Co. All Rights Reserved.</p>
     </div>
   );
 }

@@ -1,5 +1,21 @@
+$black: #404142;
+$darkbrown: #4c4036;
+$lightbrown: #77706a;
+$grey: #d8d7d4;
+$beige: #e3d6cb;
+$cream: #fef9f3;
+$success: #20a020;
+$successBkgr: #eeffe0;
+$danger: #a02020;
+$dangerBkgr: #ffe0e0;
+$info: #2020a0;
+$infoBkgr: #e0e0ff;
+
 .footer {
   text-align: center;
-  background-color: black;
-  color: white;
+  background-color: $darkbrown;
+  color: $cream;
+  font-family: "Montserrat";
+  padding: 1rem 0;
+  // margin-top: 2rem;
 }

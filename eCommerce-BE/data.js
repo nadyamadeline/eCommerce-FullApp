@@ -17,7 +17,7 @@ const data = {
   ],
   products: [
     {
-      name: "Blush Pink Sofa",
+      name: "CLAIRE Sofa",
       category: "Furniture",
       image: "/images/img1.jpeg",
       price: 500,
@@ -28,7 +28,7 @@ const data = {
       description: "Lovely pink blush sofa",
     },
     {
-      name: "Blush Pink Table",
+      name: "MODENA Table",
       category: "Furniture",
       image: "/images/img2.jpeg",
       price: 200,
@@ -39,7 +39,7 @@ const data = {
       description: "Aesthetic pink coffee table",
     },
     {
-      name: "Natural Marble Table",
+      name: "ERICA Table",
       category: "Furniture",
       image: "/images/img3.jpeg",
       price: 500,
@@ -50,7 +50,7 @@ const data = {
       description: "Natural beige marble table",
     },
     {
-      name: "Transparent Modern Chair",
+      name: "ALENA Chair",
       category: "Furniture",
       image: "/images/img4.jpeg",
       price: 50,
@@ -61,7 +61,7 @@ const data = {
       description: "Simple transparent chair",
     },
     {
-      name: "Carrie Plate",
+      name: "CARRIE Plate",
       category: "Tableware",
       image: "/images/img5.jpeg",
       price: 10,
