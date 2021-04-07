@@ -17,7 +17,7 @@ export const login = (body) => async (dispatch) => {
       type: USER_LOGIN_SUCCESS,
       payload: data,
     });
-    localStorage.setItem("userToken", JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (err) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -30,7 +30,7 @@ export const login = (body) => async (dispatch) => {
 };
 
 export const signOut = () => async (dispatch) => {
-  localStorage.removeItem("userToken");
+  localStorage.removeItem("userInfo");
   localStorage.removeItem("cartItem");
   dispatch({
     type: USER_SIGNOUT,

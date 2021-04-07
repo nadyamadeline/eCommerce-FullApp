@@ -7,7 +7,6 @@ import Hero from "./Hero";
 function Navbar() {
   const cart = useSelector((state) => state.cart.cartItem);
   const userInfo = useSelector((state) => state.login.user);
-
   let totalItem = cart.reduce((a, c) => a + Number(c.qty), 0);
 
   // scroll effect

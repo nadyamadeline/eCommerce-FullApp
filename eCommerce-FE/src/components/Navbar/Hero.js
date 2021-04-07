@@ -2,12 +2,15 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Hero.scss";
 import { signOut } from "../../redux/action/loginAction";
+import { useHistory } from "react-router-dom";
 
 function Hero() {
   const userInfo = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
+  const history = useHistory();
   const handleSignOut = () => {
     dispatch(signOut());
+    history.push("/");
   };
   return (
     <div>
@@ -30,7 +33,6 @@ function Hero() {
             ) : null} */}
 
             <p>Setting</p>
-
             <p onClick={handleSignOut}>Log Out</p>
           </div>
         </li>

@@ -7,9 +7,9 @@ import {
 
 const initialState = {
   loading: false,
-  user: localStorage.getItem("userToken")
-    ? JSON.parse(localStorage.getItem("userToken"))
-    : [],
+  // user: localStorage.getItem("userInfo")
+  //   ? JSON.parse(localStorage.getItem("userInfo"))
+  //   : [],
   error: "",
 };
 
@@ -31,7 +31,6 @@ const loginReducer = (state = initialState, action) => {
     case USER_LOGIN_FAIL:
       return {
         loading: false,
-        user: [],
         error: action.payload,
       };
     case USER_SIGNOUT:

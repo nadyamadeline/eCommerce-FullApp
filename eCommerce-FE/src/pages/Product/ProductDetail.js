@@ -4,6 +4,7 @@ import "./Product.scss";
 import { productDetail } from "../../redux/action/productDetailAction";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../../redux/action/cartAction";
+import ReactStars from "react-stars";
 
 function ProductDetail() {
   // get product detail
@@ -18,11 +19,11 @@ function ProductDetail() {
 
   // set up add to cart
   const [count, setCount] = useState(1);
-  const handleAddQty = (max) => {
-    count < max ? setCount(count + 1) : setCount(max);
+  const handleAddQty = () => {
+    setCount(count + 1);
   };
   const handleMinusQty = () => {
-    count > 1 ? setCount(count - 1) : setCount(1);
+    setCount(count - 1);
   };
 
   const handleAddToCart = (item, qty) => {
@@ -30,43 +31,74 @@ function ProductDetail() {
   };
 
   return (
-    <div className="productDetail">
+    <div className="productDetail-page">
       {productDetails.loading ? (
         <p>Loading...</p>
       ) : productDetails.error ? (
         <p>{productDetails.error}</p>
       ) : (
-        <div>
-          <img
-            src={product.image}
-            alt={product.name}
-            style={{ width: "250px", height: "250px" }}
-          />
-          {product.countInStock > 0 ? (
-            <div>
-              <p>In stock</p>
+        <div className="product-detail">
+          <img src={product.image} alt={product.name} className="detail-img" />
+          <div className="detail-info">
+            <h2>{product.name}</h2>
+            <div className="product-rating">
+              <ReactStars
+                count={5}
+                value={product.rating}
+                size={16}
+                color2={"#fff200"}
+                edit={false}
+              />
+              <p>
+                {product.rating} ({product.numReviews} sold)
+              </p>
             </div>
-          ) : (
-            <div>
-              <p>Item unavailable</p>
-            </div>
-          )}
-          {product.countInStock > 0 ? (
-            <div>
-              <div>
-                <button onClick={handleMinusQty}>-</button>
-                <p>{count}</p>
-                <button onClick={() => handleAddQty(product.countInStock)}>
-                  +
+            <h2>${product.price}</h2>
+            {product.countInStock > 0 ? (
+              <div style={{ margin: "1.5rem 0" }}>
+                <p className="col-success">In stock</p>
+              </div>
+            ) : (
+              <div style={{ margin: "1.5rem 0" }}>
+                <p className="col-danger">Sold out</p>
+              </div>
+            )}
+            {product.countInStock > 0 ? (
+              <div className="product-detail-actions">
+                <div className="cart-set-qty">
+                  <button
+                    onClick={handleMinusQty}
+                    disabled={count === 1}
+                    style={{ marginRight: "1rem" }}
+                  >
+                    -
+                  </button>
+                  <p>{count}</p>
+                  <button
+                    onClick={handleAddQty}
+                    disabled={count === product.countInStock}
+                    style={{ marginLeft: "1rem" }}
+                  >
+                    +
+                  </button>
+                </div>
+                <button
+                  onClick={() => handleAddToCart(product._id, count)}
+                  className="addCart-btn"
+                >
+                  Add to Cart
                 </button>
               </div>
-              <button onClick={() => handleAddToCart(product._id, count)}>
-                Add to Cart
-              </button>
+            ) : (
+              ""
+            )}
+            <div className="detail-desc">
+              <p style={{ fontWeight: "600", fontSize: "18px" }}>
+                Description:
+              </p>
+              <p>{product.description}</p>
             </div>
-          ) : (
-            ""
-          )}
+          </div>
         </div>
       )}
     </div>
