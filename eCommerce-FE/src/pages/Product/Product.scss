@@ -79,6 +79,11 @@ $infoBkgr: #e0e0ff;
 .col-danger {
   color: $danger;
 }
+.danger-bg {
+  background-color: $dangerBkgr;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+}
 
 .cart-set-qty {
   button {
@@ -104,7 +109,7 @@ $infoBkgr: #e0e0ff;
     &:disabled {
       background-color: #e9e9e9;
       color: $black;
-      border: none;
+      border: 1px solid #e9e9e9;
     }
   }
   p {

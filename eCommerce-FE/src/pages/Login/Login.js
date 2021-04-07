@@ -11,6 +11,7 @@ function Login() {
   const location = useLocation();
   const redirect = location.search ? location.search.split("=")[1] : "/";
   const userInfo = useSelector((state) => state.login.user);
+  const errorMsg = useSelector((state) => state.login.error);
 
   const dispatch = useDispatch();
 
@@ -55,15 +56,23 @@ function Login() {
             />
           </div>
         </div>
+        <br />
+        {errorMsg ? (
+          <div className="danger-bg">
+            <p className="col-danger">{errorMsg}</p>
+          </div>
+        ) : (
+          ""
+        )}
         <div>
-          <button type="submit" style={{ marginTop: "2rem" }}>
+          <button type="submit" style={{ marginTop: "1rem" }}>
             Log In
           </button>
         </div>
-        <div style={{ marginTop: "1rem" }}>
+        <div style={{ marginTop: "1rem" }} className="login-register">
           <p style={{ fontFamily: "Montserrat" }}>
             New to Canopy &amp; Co?{" "}
-            <Link to="/register">
+            <Link to="/register" style={{ textDecoration: "none" }}>
               <span>Sign Up</span>
             </Link>
           </p>

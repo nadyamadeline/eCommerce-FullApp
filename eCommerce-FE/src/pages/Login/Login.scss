@@ -21,24 +21,25 @@ $infoBkgr: #e0e0ff;
 
   form {
     border: 1px solid #f8f8f8;
-    height: 450px;
+    height: 400px;
     padding: 2rem;
     border-radius: 10px;
-    background-color: $beige;
+    background-color: $darkbrown;
   }
   h1 {
     margin-bottom: 1.5rem;
-    color: $darkbrown;
+    color: $cream;
     font-size: 24px;
   }
   input {
     font-size: 1rem;
+    font-family: "Nunito";
     width: 450px;
     height: 1.5rem;
     padding: 0.25rem;
     background-color: transparent;
-    border: 1px solid $darkbrown;
-    color: $black;
+    border: 1px solid $lightbrown;
+    color: $cream;
     border-radius: 3px;
     &:focus {
       outline: none;
@@ -47,14 +48,15 @@ $infoBkgr: #e0e0ff;
 
   label {
     line-height: 2rem;
+    color: $cream;
   }
 
   button {
     font-size: 16px;
     font-weight: 600;
     font-family: "Open Sans";
-    background-color: $cream;
-    color: $darkbrown;
+    background-color: $lightbrown;
+    color: $cream;
     border: 1px solid $lightbrown;
     padding: 0.75rem 2rem;
     transition-timing-function: ease-in;
@@ -66,11 +68,25 @@ $infoBkgr: #e0e0ff;
       transition-timing-function: ease-in;
       transition: all 0.5s;
 
-      background-color: $darkbrown;
-      color: $cream;
+      background-color: $cream;
+      color: $darkbrown;
     }
     &:focus {
       outline: 0;
+    }
+  }
+}
+
+.login-register {
+  margin-top: 1rem;
+  p {
+    color: $grey;
+  }
+  span {
+    color: $beige;
+    font-weight: 600;
+    &:hover {
+      color: $cream;
     }
   }
 }

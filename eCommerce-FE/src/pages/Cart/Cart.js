@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../../redux/action/cartAction";
 import "./Cart.scss";
+import { Link } from "react-router-dom";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -20,32 +21,35 @@ function Cart() {
 
   return (
     <div className="cart">
-      <h1>Shopping Cart</h1>
+      <h1 style={{ marginBottom: "2rem" }}>Shopping Cart</h1>
       <div className="cart-header">
-        <p>Item</p>
-        <p>Quantity</p>
-        <p>Price</p>
+        <p style={{ width: "30%" }}>Item</p>
+        <p style={{ width: "24%" }}>Quantity</p>
+        <p style={{ width: "25%" }}>Price</p>
         <p>Subtotal</p>
       </div>
+
       {cart.length === 0 ? (
-        <p>Cart is empty</p>
+        <p>
+          Cart is empty
+          <Link to="/">
+            <span>Shop now.</span>
+          </Link>
+        </p>
       ) : (
         cart.map((item, index) => (
           <div key={index} className="cart-items">
-            <div className="cart-image">
-              <img
-                src={item.image}
-                alt={item.name}
-                style={{ width: "250px", height: "250px" }}
-              />
-              <p>{item.name}</p>
+            <div className="cart-image" style={{ width: "30%" }}>
+              <img src={item.image} alt={item.name} />
+              <p style={{ marginLeft: "2rem" }}>{item.name}</p>
             </div>
-            <div className="cart-item-qty">
+            <div className="cart-set-qty" style={{ width: "25%" }}>
               <button
                 onClick={() =>
                   dispatch(addToCart(item.product, Number(item.qty) - 1))
                 }
                 disabled={item.qty <= 1}
+                style={{ marginRight: "1rem" }}
               >
                 -
               </button>
@@ -55,24 +59,40 @@ function Cart() {
                   dispatch(addToCart(item.product, Number(item.qty) + 1))
                 }
                 disabled={item.qty >= item.countInStock}
+                style={{ marginLeft: "1rem" }}
               >
                 +
               </button>
             </div>
-            <div>${item.price}</div>
-            <div>${item.price * item.qty}</div>
+            <div style={{ width: "25%", fontWeight: "600", fontSize: "18px" }}>
+              ${item.price}
+            </div>
+            <div style={{ width: "14%", fontWeight: "600", fontSize: "18px" }}>
+              ${item.price * item.qty}
+            </div>
             <div>
-              <button onClick={() => handleDeleteItem(item.product)}>
-                Delete
+              <button
+                onClick={() => handleDeleteItem(item.product)}
+                className="delete-btn"
+              >
+                Remove
               </button>
             </div>
           </div>
         ))
       )}
       <div className="cart-total">
-        <h3>Total:</h3>
-        <p>{cart.reduce((a, c) => a + c.qty, 0)} items</p>
-        <p>${cart.reduce((a, c) => a + c.price * c.qty, 0)}</p>
+        <h3>
+          Total{" "}
+          <span style={{ fontWeight: 400 }}>
+            ({cart.reduce((a, c) => a + c.qty, 0)} items)
+          </span>{" "}
+          :
+        </h3>
+        {/* <p>{cart.reduce((a, c) => a + c.qty, 0)} items</p> */}
+        <p className="grand-total">
+          ${cart.reduce((a, c) => a + c.price * c.qty, 0)}
+        </p>
       </div>
       <div className="cart-checkout">
         <button onClick={handleCheckOut}>Checkout</button>
