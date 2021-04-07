@@ -1,4 +1,9 @@
-import { CART_ADD_ITEM, CARD_DELETE_ITEM } from "../actionType/cartTypes";
+import {
+  CART_ADD_ITEM,
+  CART_DELETE_ITEM,
+  SAVE_SHIPPING_INFO,
+  SAVE_PAYMENT_METHOD,
+} from "../actionType/cartTypes";
 import axios from "axios";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
@@ -19,8 +24,23 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
 
 export const removeFromCart = (id) => async (dispatch, getState) => {
   dispatch({
-    type: CARD_DELETE_ITEM,
+    type: CART_DELETE_ITEM,
     payload: id,
   });
   localStorage.setItem("cartItem", JSON.stringify(getState().cart.cartItem));
+};
+
+export const saveShippingInfo = (data) => async (dispatch) => {
+  dispatch({
+    type: SAVE_SHIPPING_INFO,
+    payload: data,
+  });
+  localStorage.setItem("shippingInfo", JSON.stringify(data));
+};
+
+export const savePaymentMethod = (data) => async (dispatch) => {
+  dispatch({
+    type: SAVE_PAYMENT_METHOD,
+    payload: data,
+  });
 };

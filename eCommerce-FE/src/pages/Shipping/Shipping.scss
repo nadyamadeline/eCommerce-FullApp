@@ -11,54 +11,55 @@ $dangerBkgr: #ffe0e0;
 $info: #2020a0;
 $infoBkgr: #e0e0ff;
 
-.login {
-  min-height: calc(94vh - 7rem);
-  padding-top: 7rem;
-  font-family: "Open Sans";
+.shipping {
+  min-height: calc(94vh - 5rem);
+  padding-top: 5rem;
   background-color: #f8f8f8;
+  font-family: "Open Sans";
   display: flex;
   justify-content: center;
 
   form {
     border: 1px solid #f8f8f8;
-    height: 500px;
+    // height: 500px;
     padding: 2rem;
-    border-radius: 10px;
-    background-color: $darkbrown;
+    // border-radius: 10px;
+    // background-color: tomato;
   }
+
   h1 {
     margin-bottom: 1.5rem;
-    color: $cream;
+    color: $darkbrown;
     font-size: 24px;
   }
   input {
     font-size: 1rem;
     font-family: "Nunito";
-    width: 450px;
-    height: 1.5rem;
+    width: 500px;
+    height: 1.75rem;
     padding: 0.25rem;
-    background-color: transparent;
+    background-color: white;
     border: 1px solid $lightbrown;
-    color: $cream;
+    color: $darkbrown;
     border-radius: 3px;
     &:focus {
       outline: none;
     }
   }
-
   label {
     line-height: 2rem;
-    color: $cream;
+    color: $darkbrown;
+    font-weight: 600;
   }
 
   button {
     font-size: 16px;
     font-weight: 600;
     font-family: "Open Sans";
-    background-color: $lightbrown;
+    background-color: $darkbrown;
     color: $cream;
-    border: 1px solid $lightbrown;
-    padding: 0.75rem 2rem;
+    border: 1px solid $darkbrown;
+    padding: 0.75rem 2.25rem;
     transition-timing-function: ease-in;
     transition: all 0.5s;
     cursor: pointer;
@@ -73,20 +74,6 @@ $infoBkgr: #e0e0ff;
     }
     &:focus {
       outline: 0;
-    }
-  }
-}
-
-.login-register {
-  margin-top: 1rem;
-  p {
-    color: $grey;
-  }
-  span {
-    color: $beige;
-    font-weight: 600;
-    &:hover {
-      color: $cream;
     }
   }
 }

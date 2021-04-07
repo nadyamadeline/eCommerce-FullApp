@@ -16,7 +16,7 @@ function Cart() {
 
   const history = useHistory();
   const handleCheckOut = () => {
-    history.push(`/signin?redirect=shippping`);
+    history.push(`/signin?redirect=shipping`);
   };
 
   return (
@@ -30,12 +30,12 @@ function Cart() {
       </div>
 
       {cart.length === 0 ? (
-        <p>
-          Cart is empty
-          <Link to="/">
-            <span>Shop now.</span>
+        <div className="empty-cart">
+          <h2>It's a bit empty here...</h2>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <p>Shop now</p>
           </Link>
-        </p>
+        </div>
       ) : (
         cart.map((item, index) => (
           <div key={index} className="cart-items">

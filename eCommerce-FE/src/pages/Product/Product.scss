@@ -41,8 +41,9 @@ $infoBkgr: #e0e0ff;
     font-size: 16px;
     font-weight: 600;
     font-family: "Open Sans";
-    background-color: $cream;
-    color: $darkbrown;
+    background-color: $darkbrown;
+    color: $cream;
+
     border: 1px solid $lightbrown;
     padding: 1rem 2rem;
     transition-timing-function: ease-in;
@@ -52,9 +53,8 @@ $infoBkgr: #e0e0ff;
     &:hover {
       transition-timing-function: ease-in;
       transition: all 0.5s;
-
-      background-color: $darkbrown;
-      color: $cream;
+      background-color: $cream;
+      color: $darkbrown;
     }
     &:focus {
       outline: 0;
