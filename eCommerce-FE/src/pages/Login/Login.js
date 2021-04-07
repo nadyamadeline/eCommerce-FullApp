@@ -26,15 +26,17 @@ function Login() {
       history.push(redirect);
     }
   }, [userInfo, history, redirect]);
+
   return (
     <div className="login">
       <form onSubmit={submitHandler}>
         <div>
-          <h1>Sign In</h1>
+          <h1>Log In</h1>
         </div>
         <div>
           <div>
             <label htmlFor="">Email</label>
+            <br />
             <input
               type="email"
               placeholder="example@example.com"
@@ -42,8 +44,9 @@ function Login() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div>
+          <div style={{ marginTop: "2rem" }}>
             <label htmlFor="">Password</label>
+            <br />
             <input
               type="password"
               required
@@ -53,11 +56,13 @@ function Login() {
           </div>
         </div>
         <div>
-          <button type="submit">Log In</button>
+          <button type="submit" style={{ marginTop: "2rem" }}>
+            Log In
+          </button>
         </div>
-        <div>
-          <p>
-            Don't have an account?
+        <div style={{ marginTop: "1rem" }}>
+          <p style={{ fontFamily: "Montserrat" }}>
+            New to Canopy &amp; Co?{" "}
             <Link to="/register">
               <span>Sign Up</span>
             </Link>

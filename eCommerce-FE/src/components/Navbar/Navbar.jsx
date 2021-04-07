@@ -27,12 +27,12 @@ function Navbar() {
           <p>canopy &amp; co.</p>
         </div>
       </Link>
-      <div className="nav-tabs">
+      {/* <div className="nav-tabs">
         <h2>Shop</h2>
         <h2>About</h2>
         <h2>Featured</h2>
         <h2>New</h2>
-      </div>
+      </div> */}
       <div className="menu">
         <Link to="/cart" style={{ textDecoration: "none" }}>
           <h2 className="nav-cart">
