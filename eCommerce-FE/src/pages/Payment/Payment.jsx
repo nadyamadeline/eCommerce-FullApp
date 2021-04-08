@@ -16,7 +16,7 @@ function Payment() {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
-    history.push("/placeorder");
+    history.push("/review");
   };
   return (
     <div className="payment">

@@ -1,0 +1,43 @@
+$black: #404142;
+$darkbrown: #4c4036;
+$lightbrown: #77706a;
+$grey: #d8d7d4;
+$beige: #e3d6cb;
+$cream: #fef9f3;
+$success: #20a020;
+$successBkgr: #eeffe0;
+$danger: #a02020;
+$dangerBkgr: #ffe0e0;
+$info: #2020a0;
+$infoBkgr: #e0e0ff;
+
+.review {
+  display: flex;
+  min-height: calc(94vh - 5rem);
+  padding-top: 5rem;
+  background-color: #f8f8f8;
+  padding: 5rem 3rem 0 3rem;
+
+  .order-detail {
+    width: 60%;
+    margin-right: 5rem;
+
+    .review-shipping,
+    .review-payment,
+    .review-items {
+      background-color: $beige;
+      margin-bottom: 1rem;
+      padding: 2rem;
+      border-radius: 5px;
+    }
+  }
+
+  .order-summary {
+    width: 40%;
+
+    .summary-detail {
+      background-color: #ffffff;
+      padding: 2rem;
+    }
+  }
+}

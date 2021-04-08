@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import UserRouter from "./routers/user.js"; // in server-side programming, we need to append the .js extension
 import ProductRouter from "./routers/product.js";
 import dotenv from "dotenv";
+import orderRouter from "./routers/order.js";
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,9 @@ app.use("/api/users", UserRouter);
 
 // show sample products
 app.use("/api/products", ProductRouter);
+
+// show order
+app.use("/api/orders", orderRouter);
 
 // set the root of our server
 app.get("/", (req, res) => {

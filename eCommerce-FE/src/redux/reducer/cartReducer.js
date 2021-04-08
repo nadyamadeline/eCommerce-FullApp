@@ -3,6 +3,7 @@ import {
   CART_DELETE_ITEM,
   SAVE_SHIPPING_INFO,
   SAVE_PAYMENT_METHOD,
+  CART_EMPTY,
 } from "../actionType/cartTypes";
 
 const initalState = {
@@ -48,6 +49,8 @@ const cartReducer = (state = initalState, action) => {
         ...state,
         paymentMethod: action.payload,
       };
+    case CART_EMPTY:
+      return { ...state, cartItem: [] };
     default:
       return state;
   }

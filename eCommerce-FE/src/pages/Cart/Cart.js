@@ -89,7 +89,7 @@ function Cart() {
           </span>{" "}
           :
         </h3>
-        {/* <p>{cart.reduce((a, c) => a + c.qty, 0)} items</p> */}
+
         <p className="grand-total">
           ${cart.reduce((a, c) => a + c.price * c.qty, 0)}
         </p>

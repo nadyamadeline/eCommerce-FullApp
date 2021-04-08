@@ -9,6 +9,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Shipping from "./pages/Shipping/Shipping.jsx";
 import Payment from "./pages/Payment/Payment";
+import Review from "./pages/Review/Review";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -19,11 +20,12 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/products/:id" component={ProductDetail} />
-          <Route path="/cart/" component={Cart} />
+          <Route path="/cart" component={Cart} />
           <Route path="/signin" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/shipping" component={Shipping} />
           <Route path="/payment" component={Payment} />
+          <Route path="/review" component={Review} />
         </Switch>
         <Footer />
       </div>
