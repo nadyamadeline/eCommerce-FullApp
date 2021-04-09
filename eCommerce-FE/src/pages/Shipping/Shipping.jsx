@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Shipping.scss";
-import { Link, useHistory, useLocation } from "react-router-dom";
-import CheckoutSteps from "../../components/CheckoutSteps/CheckoutSteps";
+import { useHistory } from "react-router-dom";
+// import CheckoutSteps from "../../components/CheckoutSteps/CheckoutSteps";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingInfo } from "../../redux/action/cartAction";
 
@@ -14,13 +14,14 @@ function Shipping() {
   const [country, setCountry] = useState(shippingInfo.country);
 
   // make sure user is logged in
+  const history = useHistory();
   const userInfo = useSelector((state) => state.login.user);
   if (!userInfo) {
     history.push("/signin");
   }
 
   const dispatch = useDispatch();
-  const history = useHistory();
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(saveShippingInfo({ name, address, city, country, postCode }));
@@ -86,29 +87,12 @@ function Shipping() {
           </div>
         </div>
         <br />
-        {/* {errorMsg ? (
-          <div className="danger-bg">
-            <p className="col-danger">{errorMsg}</p>
-          </div>
-        ) : (
-          ""
-        )} */}
+
         <div>
           <button type="submit" style={{ marginTop: "1rem" }}>
             Continue
           </button>
         </div>
-        {/* <div style={{ marginTop: "1rem" }} className="login-register">
-          <p style={{ fontFamily: "Montserrat" }}>
-            Have an account?{" "}
-            <Link
-              to={`/signin?redirect=${redirect}`}
-              style={{ textDecoration: "none" }}
-            >
-              <span>Log In</span>
-            </Link>
-          </p>
-        </div> */}
       </form>
     </div>
   );

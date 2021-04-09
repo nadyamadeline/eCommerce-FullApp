@@ -7,12 +7,13 @@ import { useHistory } from "react-router-dom";
 function Payment() {
   const [paymentMethod, setPaymentMethod] = useState("PayPal");
   const shippingInfo = useSelector((state) => state.cart.shippingInfo);
+
+  const history = useHistory();
   if (!shippingInfo.address) {
     history.push("/shipping");
   }
 
   const dispatch = useDispatch();
-  const history = useHistory();
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
