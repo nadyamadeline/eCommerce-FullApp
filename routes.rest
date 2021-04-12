@@ -6,6 +6,12 @@ POST http://localhost:5000/api/users/login
 Content-Type: application/json
 
 {
-    "email" : "admin@example.com",
-    "password": "1234"
+    "email" : "tony123@avengers.com",
+    "password": "123456"
 }
+
+###
+
+GET http://localhost:5000/api/orders/6070238a802517050a920680
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDZkN2U1Zjc5YTI0ZTIxMmI0NTkyMzkiLCJuYW1lIjoiVG9ueSBTdGFyayIsImVtYWlsIjoidG9ueTEyM0BhdmVuZ2Vycy5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjE3OTYzMjg0LCJleHAiOjE2MjA1NTUyODR9.LL9u9CNqIH8zBDCoEgxprJn7W0XLZ4dLAk6hRHBuaAg
+Content-Type: application/json

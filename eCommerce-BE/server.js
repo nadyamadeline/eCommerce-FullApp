@@ -25,6 +25,11 @@ app.use("/api/products", ProductRouter);
 // show order
 app.use("/api/orders", orderRouter);
 
+// api for paypal
+app.get("/api/config/paypal", (req, res) => {
+  res.send(process.env.PAYPAL_CLIENT_ID || "sb");
+});
+
 // set the root of our server
 app.get("/", (req, res) => {
   res.send("Server is ready");

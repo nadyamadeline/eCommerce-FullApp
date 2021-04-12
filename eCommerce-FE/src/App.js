@@ -10,6 +10,7 @@ import Register from "./pages/Register/Register";
 import Shipping from "./pages/Shipping/Shipping.jsx";
 import Payment from "./pages/Payment/Payment";
 import Review from "./pages/Review/Review";
+import OrderDetail from "./pages/OrderDetail/OrderDetail";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/shipping" component={Shipping} />
           <Route path="/payment" component={Payment} />
           <Route path="/review" component={Review} />
+          <Route path="/order/:id" component={OrderDetail} />
         </Switch>
         <Footer />
       </div>

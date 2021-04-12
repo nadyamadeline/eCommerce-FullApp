@@ -49,68 +49,70 @@ function Review() {
     }
   }, [dispatch, history, orderCreate]);
   return (
-    <div className="review">
-      <div className="order-detail">
-        <div className="review-shipping">
-          <h2>Shipping</h2>
-          <p>
-            <span>Name: </span> {shippingInfo.name}
-          </p>
-          <p>
-            <span>Address: </span>
-            {shippingInfo.address}, {shippingInfo.city}, {shippingInfo.country},{" "}
-            {shippingInfo.postCode}
-          </p>
-        </div>
-        <div className="review-payment">
-          <h2>Payment</h2>
-          <p>
-            <span>Method: </span> {paymentMethod}
-          </p>
-        </div>
-        <div className="review-items">
-          <h2>Items</h2>
-          <div className="review-item-header">
-            <p style={{ width: "42%" }}>Item</p>
-            <p style={{ width: "25%" }}>Quantity</p>
-            <p style={{ width: "20%" }}>Price</p>
-            <p>Subtotal</p>
+    <div className="review-container">
+      <div className="review">
+        <div className="order-detail">
+          <div className="review-shipping">
+            <h2>Shipping</h2>
+            <p>
+              <span>Name: </span> {shippingInfo.name}
+            </p>
+            <p>
+              <span>Address: </span>
+              {shippingInfo.address}, {shippingInfo.city},{" "}
+              {shippingInfo.country}, {shippingInfo.postCode}
+            </p>
           </div>
-          {cartItem.map((item, index) => (
-            <div key={index} style={{ margin: 0 }} className="review-item">
-              <div style={{ width: "42%" }} className="review-img-name">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  style={{ width: "100px" }}
-                />
-                <p>{item.name}</p>
-              </div>
-              <p style={{ width: "25%" }}>{item.qty}</p>
-              <p style={{ width: "20%" }}>${item.price}</p>
-              <p>${item.qty * item.price}</p>
+          <div className="review-payment">
+            <h2>Payment</h2>
+            <p>
+              <span>Method: </span> {paymentMethod}
+            </p>
+          </div>
+          <div className="review-items">
+            <h2>Items</h2>
+            <div className="review-item-header">
+              <p style={{ width: "42%" }}>Item</p>
+              <p style={{ width: "25%" }}>Quantity</p>
+              <p style={{ width: "20%" }}>Price</p>
+              <p>Subtotal</p>
             </div>
-          ))}
+            {cartItem.map((item, index) => (
+              <div key={index} style={{ margin: 0 }} className="review-item">
+                <div style={{ width: "42%" }} className="review-img-name">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    style={{ width: "100px" }}
+                  />
+                  <p>{item.name}</p>
+                </div>
+                <p style={{ width: "25%" }}>{item.qty}</p>
+                <p style={{ width: "20%" }}>${item.price}</p>
+                <p>${item.qty * item.price}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="order-summary">
-        <div className="summary-detail">
-          <h2>Purchase Summary</h2>
-          <p>
-            <span>Items:</span> ${cart.itemsPrice.toFixed(2)}
-          </p>
-          <p>
-            <span>Shipping:</span> ${cart.shippingPrice.toFixed(2)}
-          </p>
-          <p>
-            <span>Tax:</span> ${cart.taxPrice.toFixed(2)}
-          </p>
-          <p style={{ fontSize: "20px" }}>
-            <span>Total:</span> ${cart.totalPrice.toFixed(2)}
-          </p>
-          <button onClick={placeOrder} disabled={cartItem.length === 0}>
-            Place Order
-          </button>
+        <div className="order-summary">
+          <div className="summary-detail">
+            <h2>Purchase Summary</h2>
+            <p>
+              <span>Items:</span> ${cart.itemsPrice.toFixed(2)}
+            </p>
+            <p>
+              <span>Shipping:</span> ${cart.shippingPrice.toFixed(2)}
+            </p>
+            <p>
+              <span>Tax:</span> ${cart.taxPrice.toFixed(2)}
+            </p>
+            <p style={{ fontSize: "20px" }}>
+              <span>Total:</span> ${cart.totalPrice.toFixed(2)}
+            </p>
+            <button onClick={placeOrder} disabled={cartItem.length === 0}>
+              Place Order
+            </button>
+          </div>
         </div>
       </div>
     </div>

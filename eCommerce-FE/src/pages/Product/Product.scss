@@ -76,6 +76,11 @@ $infoBkgr: #e0e0ff;
 .col-success {
   color: $success;
 }
+.success-bg {
+  background-color: $successBkgr;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+}
 
 .col-danger {
   color: $danger;
