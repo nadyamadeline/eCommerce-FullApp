@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Login.scss";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux/action/loginAction";
+import { login } from "../../redux/action/userAction";
 
 function Login() {
   const [email, setEmail] = useState("");

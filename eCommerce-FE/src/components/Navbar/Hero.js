@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Hero.scss";
-import { signOut } from "../../redux/action/loginAction";
-import { useHistory } from "react-router-dom";
+import { signOut } from "../../redux/action/userAction";
+import { useHistory, Link } from "react-router-dom";
 
 function Hero() {
   const userInfo = useSelector((state) => state.login.user);
@@ -31,8 +31,13 @@ function Hero() {
                 <p>Admin</p>
               </Link>
             ) : null} */}
-
-            <p>Setting</p>
+            <Link to={`/user/profile`} style={{ textDecoration: "none" }}>
+              <p>Profile</p>
+            </Link>
+            <Link to={`/user/orders`} style={{ textDecoration: "none" }}>
+              <p>Orders</p>
+            </Link>
+            {/* <p>Setting</p> */}
             <p onClick={handleSignOut}>Log Out</p>
           </div>
         </li>

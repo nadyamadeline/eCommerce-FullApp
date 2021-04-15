@@ -111,7 +111,9 @@ function OrderDetail() {
                 <h4 className="col-success">
                   Paid at{" "}
                   {orderDetails && orderDetails.paidAt
-                    ? Moment(orderDetails.paidAt).format("DD MMM YYYY, hh:mm a")
+                    ? Moment(orderDetails.paidAt).format(
+                        "DD MMMM YYYY, hh:mm a"
+                      )
                     : ""}
                 </h4>
               </div>

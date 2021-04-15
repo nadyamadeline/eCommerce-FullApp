@@ -11,6 +11,8 @@ import Shipping from "./pages/Shipping/Shipping.jsx";
 import Payment from "./pages/Payment/Payment";
 import Review from "./pages/Review/Review";
 import OrderDetail from "./pages/OrderDetail/OrderDetail";
+import OrderHistory from "./pages/OrderHistory/OrderHistory";
+import Profile from "./pages/User/Profile.jsx";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
           <Route path="/payment" component={Payment} />
           <Route path="/review" component={Review} />
           <Route path="/order/:id" component={OrderDetail} />
+          <Route path="/user/orders" component={OrderHistory} />
+          <Route path="/user/profile" component={Profile} />
         </Switch>
         <Footer />
       </div>

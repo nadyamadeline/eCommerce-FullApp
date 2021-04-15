@@ -1,54 +1,77 @@
 import React, { useEffect, useState } from "react";
-import "../Login/Login.scss";
-import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../redux/action/userAction";
+import { userDetail, updateUserProfile } from "../../redux/action/userAction";
+import { USER_UPDATE_RESET } from "../../redux/actionType/userTypes";
 
-function Register() {
+const Profile = () => {
+  // get current user data
+  const userInfo = useSelector((state) => state.login.user);
+  const detailUser = useSelector((state) => state.userDetail.userData);
+  const dispatch = useDispatch();
+
+  // edit profile
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const location = useLocation();
-  const redirect = location.search ? location.search.split("=")[1] : "/";
-  const userInfo = useSelector((state) => state.login.user);
-  const errorMsg = useSelector((state) => state.login.error);
+  // const updateProfile = useSelector((state) => state.updateProfile);
+  // console.log(name);
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!detailUser) {
+      dispatch({ type: USER_UPDATE_RESET });
+      dispatch(userDetail(userInfo._id));
+    } else {
+      setName(detailUser.name);
+      setEmail(detailUser.email);
+    }
+  }, [dispatch, userInfo, detailUser]);
 
   const submitHandler = (e) => {
-    e.preventDefault();
-    const body = { name, email, password };
+    // e.preventDefault();
+    const body = {
+      userId: detailUser._id,
+      name,
+      email,
+      password,
+    };
     if (password !== confirmPassword) {
       alert("Password does not match.");
     } else {
-      dispatch(register(body));
+      dispatch(updateUserProfile(body));
     }
   };
-
-  const history = useHistory();
-  useEffect(() => {
-    if (userInfo) {
-      history.push(redirect);
-    }
-  }, [userInfo, history, redirect]);
-
   return (
     <div className="login">
       <form onSubmit={submitHandler}>
         <div>
-          <h1>Register</h1>
+          <h1>My Profile</h1>
         </div>
+        {/* {updateProfile.loading ? (
+          <div>
+            <p>Updating...</p>
+          </div>
+        ) : updateProfile.error ? (
+          <div>{updateProfile.error}</div>
+        ) : updateProfile.success ? (
+          <div>
+            <p>Updated successfully!</p>
+          </div>
+        ) : (
+          ""
+        )} */}
         <div>
           <div>
             <label htmlFor="">Name</label>
             <br />
             <input
+              id="name"
               type="text"
               placeholder="John Doe"
               required
               onChange={(e) => setName(e.target.value)}
+              value={name}
             />
           </div>
           <div style={{ marginTop: "1rem" }}>
@@ -59,6 +82,7 @@ function Register() {
               placeholder="example@example.com"
               required
               onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
           </div>
           <div style={{ marginTop: "1rem" }}>
@@ -83,32 +107,15 @@ function Register() {
           </div>
         </div>
         <br />
-        {errorMsg ? (
-          <div className="danger-bg">
-            <p className="col-danger">{errorMsg}</p>
-          </div>
-        ) : (
-          ""
-        )}
-        <div>
+
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <button type="submit" style={{ marginTop: "1rem" }}>
-            Register
+            Edit Profile
           </button>
-        </div>
-        <div style={{ marginTop: "1rem" }} className="login-register">
-          <p style={{ fontFamily: "Montserrat" }}>
-            Have an account?{" "}
-            <Link
-              to={`/signin?redirect=${redirect}`}
-              style={{ textDecoration: "none" }}
-            >
-              <span>Log In</span>
-            </Link>
-          </p>
         </div>
       </form>
     </div>
   );
-}
+};
 
-export default Register;
+export default Profile;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./Product.scss";
+import "./ProductDetail.scss";
 import { productDetail } from "../../redux/action/productDetailAction";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../../redux/action/cartAction";

@@ -1,0 +1,46 @@
+$black: #404142;
+$darkbrown: #4c4036;
+$lightbrown: #77706a;
+$grey: #d8d7d4;
+$beige: #e3d6cb;
+$cream: #fef9f3;
+$success: #20a020;
+$successBkgr: #eeffe0;
+$danger: #a02020;
+$dangerBkgr: #ffe0e0;
+$info: #2020a0;
+$infoBkgr: #e0e0ff;
+.order-history {
+  padding: 5rem 4rem 2rem 4rem;
+  background-color: #f8f8f8;
+  min-height: calc(94vh - 7rem);
+  font-family: "Open Sans";
+
+  h1 {
+    margin-bottom: 2rem;
+    color: $darkbrown;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    color: $darkbrown;
+  }
+  tbody tr:nth-of-type(odd) {
+    background-color: white;
+  }
+
+  td,
+  th {
+    text-align: left;
+    border: 1px solid $darkbrown;
+    padding: 0.5rem;
+  }
+
+  button {
+    padding: 0.3rem 1rem;
+  }
+}

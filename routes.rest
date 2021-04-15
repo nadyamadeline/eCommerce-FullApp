@@ -6,8 +6,8 @@ POST http://localhost:5000/api/users/login
 Content-Type: application/json
 
 {
-    "email" : "tony123@avengers.com",
-    "password": "123456"
+    "email" : "user@example.com",
+    "password": "1234"
 }
 
 ###
@@ -15,3 +15,10 @@ Content-Type: application/json
 GET http://localhost:5000/api/orders/6070238a802517050a920680
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDZkN2U1Zjc5YTI0ZTIxMmI0NTkyMzkiLCJuYW1lIjoiVG9ueSBTdGFyayIsImVtYWlsIjoidG9ueTEyM0BhdmVuZ2Vycy5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjE3OTYzMjg0LCJleHAiOjE2MjA1NTUyODR9.LL9u9CNqIH8zBDCoEgxprJn7W0XLZ4dLAk6hRHBuaAg
 Content-Type: application/json
+
+###
+GET http://localhost:5000/api/users/6069ea0167ebf0f7f04b5295
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDZkN2U1Zjc5YTI0ZTIxMmI0NTkyMzkiLCJuYW1lIjoiVG9ueSBTdGFyayIsImVtYWlsIjoidG9ueTEyM0BhdmVuZ2Vycy5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjE4NDkzNTE4LCJleHAiOjE2MjEwODU1MTh9.qXhNkpslNHrll-Xno1AshJFWZH36NTQW_5YIAbYlybg
+Content-Type: application/json
+
+###
