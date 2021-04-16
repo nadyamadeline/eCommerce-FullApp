@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "./Hero.scss";
+import "./User.scss";
 import { signOut } from "../../redux/action/userAction";
 import { useHistory, Link } from "react-router-dom";
 
-function Hero() {
+function User() {
   const userInfo = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -18,26 +18,16 @@ function Hero() {
         <li className="hero-dropdown">
           <div className="hero-profile-container">
             <h2 className="hero-dropbtn">
-              {userInfo.isAdmin ? <p>Admin</p> : <p>{userInfo.name}</p>}
+              <p>{userInfo.name}</p>
             </h2>
           </div>
           <div className="hero-dropdown-content">
-            {/* {!userInfo.isAdmin ? (
-              <Link to="/dashboard" style={{ textDecoration: "none" }}>
-                <p>{userInfo.name}</p>
-              </Link>
-            ) : userInfo.isAdmin ? (
-              <Link to="/admin/overview" style={{ textDecoration: "none" }}>
-                <p>Admin</p>
-              </Link>
-            ) : null} */}
             <Link to={`/user/profile`} style={{ textDecoration: "none" }}>
               <p>Profile</p>
             </Link>
             <Link to={`/user/orders`} style={{ textDecoration: "none" }}>
               <p>Orders</p>
             </Link>
-            {/* <p>Setting</p> */}
             <p onClick={handleSignOut}>Log Out</p>
           </div>
         </li>
@@ -46,4 +36,4 @@ function Hero() {
   );
 }
 
-export default Hero;
+export default User;

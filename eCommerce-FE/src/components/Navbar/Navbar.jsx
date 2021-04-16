@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Hero from "./Hero";
+import User from "./User";
+import Admin from "./Admin";
 
 function Navbar() {
   const cart = useSelector((state) => state.cart.cartItem);
@@ -41,7 +42,10 @@ function Navbar() {
         </Link>
 
         {userInfo ? (
-          <Hero />
+          <div style={{ display: "flex" }}>
+            <User />
+            {userInfo.isAdmin ? <Admin /> : ""}
+          </div>
         ) : (
           <Link to="/signin" style={{ textDecoration: "none" }}>
             <h2 className="nav-login">Log In</h2>

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userDetail, updateUserProfile } from "../../redux/action/userAction";
-import { USER_UPDATE_RESET } from "../../redux/actionType/userTypes";
+import {
+  userDetail,
+  updateUserProfile,
+} from "../../../redux/action/userAction";
+import { USER_UPDATE_RESET } from "../../../redux/actionType/userTypes";
 
 const Profile = () => {
   // get current user data
@@ -29,7 +32,7 @@ const Profile = () => {
   }, [dispatch, userInfo, detailUser]);
 
   const submitHandler = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const body = {
       userId: detailUser._id,
       name,
@@ -40,6 +43,7 @@ const Profile = () => {
       alert("Password does not match.");
     } else {
       dispatch(updateUserProfile(body));
+      window.location.reload();
     }
   };
   return (

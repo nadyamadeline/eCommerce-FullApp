@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { myOrders } from "../../redux/action/orderAction";
+import { myOrders } from "../../../redux/action/orderAction";
 import { Link } from "react-router-dom";
 import Moment from "moment";
 import "./OrderHistory.scss";

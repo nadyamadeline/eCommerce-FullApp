@@ -1,6 +1,5 @@
 import React from "react";
 import Home from "./pages/Home/Home";
-import "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import ProductDetail from "./pages/Product/ProductDetail";
@@ -11,9 +10,12 @@ import Shipping from "./pages/Shipping/Shipping.jsx";
 import Payment from "./pages/Payment/Payment";
 import Review from "./pages/Review/Review";
 import OrderDetail from "./pages/OrderDetail/OrderDetail";
-import OrderHistory from "./pages/OrderHistory/OrderHistory";
-import Profile from "./pages/User/Profile.jsx";
+import OrderHistory from "./pages/User/OrderHistory/OrderHistory";
+import Profile from "./pages/User/Profile/Profile.jsx";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import AdminRoute from "./components/PrivateRoute/AdminRoute";
+import AdminProduct from "./pages/Admin/ProductList/ProductList";
 
 function App() {
   return (
@@ -30,8 +32,9 @@ function App() {
           <Route path="/payment" component={Payment} />
           <Route path="/review" component={Review} />
           <Route path="/order/:id" component={OrderDetail} />
-          <Route path="/user/orders" component={OrderHistory} />
-          <Route path="/user/profile" component={Profile} />
+          <PrivateRoute path="/user/orders" component={OrderHistory} />
+          <PrivateRoute path="/user/profile" component={Profile} />
+          <AdminRoute path="/admin/productList" component={AdminProduct} />
         </Switch>
         <Footer />
       </div>
