@@ -12,7 +12,6 @@ const ProductList = () => {
   }, [dispatch]);
 
   const deleteProductHandler = () => {};
-  //   const createProductHandler = () => {};
   return (
     <div className="order-history">
       <div
@@ -67,7 +66,7 @@ const ProductList = () => {
                     <td>{product.brand}</td>
                     <td>
                       <div>
-                        <Link to={`/product/${product._id}/edit`}>
+                        <Link to={`/products/${product._id}/edit`}>
                           <button style={{ marginRight: "0.5rem" }}>
                             Edit
                           </button>

@@ -17,6 +17,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import AdminRoute from "./components/PrivateRoute/AdminRoute";
 import AdminProduct from "./pages/Admin/ProductList/ProductList";
 import CreateProduct from "./pages/Admin/ProductList/CreateProduct";
+import EditProduct from "./pages/Admin/ProductList/EditProduct";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/products/:id" component={ProductDetail} />
+          <Route exact path="/products/:id" component={ProductDetail} />
           <Route path="/cart" component={Cart} />
           <Route path="/signin" component={Login} />
           <Route path="/register" component={Register} />
@@ -37,6 +38,7 @@ function App() {
           <PrivateRoute path="/user/profile" component={Profile} />
           <AdminRoute path="/admin/productList" component={AdminProduct} />
           <AdminRoute path="/admin/products/create" component={CreateProduct} />
+          <AdminRoute path="/products/:id/edit" component={EditProduct} />
         </Switch>
         <Footer />
       </div>

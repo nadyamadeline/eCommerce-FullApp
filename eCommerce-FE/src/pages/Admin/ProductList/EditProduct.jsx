@@ -1,10 +1,14 @@
-import React, { useState } from "react";
-import { createProduct } from "../../../redux/action/adminAction";
+import React, { useEffect, useState } from "react";
+import { productDetail } from "../../../redux/action/productDetailAction";
 import "./CreateProduct.scss";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { updateProduct } from "../../../redux/action/adminAction";
+import { PRODUCT_UPDATE_RESET } from "../../../redux/actionType/adminTypes";
 
 const CreateProduct = () => {
+  const { id } = useParams();
+
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
@@ -13,9 +17,31 @@ const CreateProduct = () => {
   const [inStock, setInStock] = useState("");
   const [description, setDescription] = useState("");
 
+  const product = useSelector((state) => state.productDetailReducer.product);
+  const productUpdate = useSelector((state) => state.updateProduct);
+
   const dispatch = useDispatch();
   const history = useHistory();
-  const submitHandler = () => {
+  useEffect(() => {
+    if (productUpdate.success) {
+      dispatch({ type: PRODUCT_UPDATE_RESET });
+      history.push("/admin/productList");
+    }
+    if (product && !product.name) {
+      dispatch(productDetail(id));
+    } else {
+      setName(product.name);
+      setCategory(product.category);
+      setBrand(product.brand);
+      setimage(product.image);
+      setPrice(product.price);
+      setInStock(product.countInStock);
+      setDescription(product.description);
+    }
+  }, [dispatch, product, productUpdate]);
+
+  const editHandler = (e) => {
+    e.preventDefault();
     const body = {
       name: name,
       category: category,
@@ -25,14 +51,13 @@ const CreateProduct = () => {
       countInStock: inStock,
       description: description,
     };
-    dispatch(createProduct(body));
-    history.push(`/admin/productList`);
+    dispatch(updateProduct(id, body));
   };
   return (
     <div className="createProduct">
-      <form onSubmit={submitHandler}>
+      <form onSubmit={editHandler}>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <h1>Create Product</h1>
+          <h1>Edit Product</h1>
         </div>
 
         <div>
@@ -45,6 +70,7 @@ const CreateProduct = () => {
               placeholder="CERRA Table"
               required
               onChange={(e) => setName(e.target.value)}
+              value={name}
             />
           </div>
           <div style={{ marginTop: "1rem" }}>
@@ -55,6 +81,7 @@ const CreateProduct = () => {
               placeholder="Furniture"
               required
               onChange={(e) => setCategory(e.target.value)}
+              value={category}
             />
           </div>
           <div style={{ marginTop: "1rem" }}>
@@ -65,6 +92,7 @@ const CreateProduct = () => {
               required
               placeholder="Sierra"
               onChange={(e) => setBrand(e.target.value)}
+              value={brand}
             />
           </div>
           <div style={{ marginTop: "1rem" }}>
@@ -75,6 +103,7 @@ const CreateProduct = () => {
               required
               placeholder="/images/img.jpeg"
               onChange={(e) => setimage(e.target.value)}
+              value={image}
             />
           </div>
           <div style={{ marginTop: "1rem" }}>
@@ -85,6 +114,7 @@ const CreateProduct = () => {
               required
               placeholder="100"
               onChange={(e) => setPrice(e.target.value)}
+              value={price}
             />
           </div>
 
@@ -96,6 +126,7 @@ const CreateProduct = () => {
               required
               placeholder="10"
               onChange={(e) => setInStock(e.target.value)}
+              value={inStock}
             />
           </div>
 
@@ -107,6 +138,7 @@ const CreateProduct = () => {
               required
               placeholder="Lovely table with gold lining"
               onChange={(e) => setDescription(e.target.value)}
+              value={description}
             />
           </div>
         </div>
@@ -114,7 +146,7 @@ const CreateProduct = () => {
 
         <div style={{ display: "flex", justifyContent: "center" }}>
           <button type="submit" style={{ marginTop: "1rem" }}>
-            Create Product
+            Update
           </button>
         </div>
       </form>
