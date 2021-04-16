@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
@@ -12,10 +13,10 @@ import Review from "./pages/Review/Review";
 import OrderDetail from "./pages/OrderDetail/OrderDetail";
 import OrderHistory from "./pages/User/OrderHistory/OrderHistory";
 import Profile from "./pages/User/Profile/Profile.jsx";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import AdminRoute from "./components/PrivateRoute/AdminRoute";
 import AdminProduct from "./pages/Admin/ProductList/ProductList";
+import CreateProduct from "./pages/Admin/ProductList/CreateProduct";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <PrivateRoute path="/user/orders" component={OrderHistory} />
           <PrivateRoute path="/user/profile" component={Profile} />
           <AdminRoute path="/admin/productList" component={AdminProduct} />
+          <AdminRoute path="/admin/products/create" component={CreateProduct} />
         </Switch>
         <Footer />
       </div>

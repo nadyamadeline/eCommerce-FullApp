@@ -1,11 +1,11 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./User.scss";
 import { signOut } from "../../redux/action/userAction";
 import { useHistory, Link } from "react-router-dom";
 
 function User() {
-  const userInfo = useSelector((state) => state.login.user);
+  // const userInfo = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
   const history = useHistory();
   const handleSignOut = () => {

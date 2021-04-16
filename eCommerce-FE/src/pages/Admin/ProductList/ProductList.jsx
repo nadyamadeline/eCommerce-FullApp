@@ -12,6 +12,7 @@ const ProductList = () => {
   }, [dispatch]);
 
   const deleteProductHandler = () => {};
+  //   const createProductHandler = () => {};
   return (
     <div className="order-history">
       <div
@@ -21,10 +22,12 @@ const ProductList = () => {
           alignItems: "center",
         }}
       >
-        <h1>My Orders</h1>
-        <button style={{ padding: "12px 16px", fontSize: "16px" }}>
-          Create Product
-        </button>
+        <h1>Products</h1>
+        <Link to={`/admin/products/create`}>
+          <button style={{ padding: "12px 16px", fontSize: "16px" }}>
+            Create Product
+          </button>
+        </Link>
       </div>
       {productList.loading ? (
         <p>Loading...</p>

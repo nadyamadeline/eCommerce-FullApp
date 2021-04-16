@@ -6,7 +6,7 @@ POST http://localhost:5000/api/users/login
 Content-Type: application/json
 
 {
-    "email" : "user@example.com",
+    "email" : "admin@example.com",
     "password": "1234"
 }
 
@@ -23,4 +23,17 @@ Content-Type: application/json
 
 ###
 
-GET
+POST http://localhost:5000/api/products/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDY5ZWEwMTY3ZWJmMGY3ZjA0YjUyOTQiLCJuYW1lIjoiTmFkeWEiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjE4NTcxNDk4LCJleHAiOjE2MjExNjM0OTh9.JFdATcDXKqHg5QPbVZdoLOx8N45f1rfr_z8elQSM1KI
+Content-Type: application/json
+
+{
+    "name": "CELESTE Plate",
+    "category": "Tableware",
+    "image": "/images/img7.jpeg",
+    "price": 10,
+    "countInStock": 15,
+    "brand": "Polonia",
+    "description": "Lovely pink plate with gold lining"
+  
+}
