@@ -18,6 +18,7 @@ import AdminRoute from "./components/PrivateRoute/AdminRoute";
 import AdminProduct from "./pages/Admin/ProductList/ProductList";
 import CreateProduct from "./pages/Admin/ProductList/CreateProduct";
 import EditProduct from "./pages/Admin/ProductList/EditProduct";
+import OrderList from "./pages/Admin/OrderList/OrderList";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <AdminRoute path="/admin/productList" component={AdminProduct} />
           <AdminRoute path="/admin/products/create" component={CreateProduct} />
           <AdminRoute path="/products/:id/edit" component={EditProduct} />
+          <AdminRoute path="/admin/orderList" component={OrderList} />
         </Switch>
         <Footer />
       </div>

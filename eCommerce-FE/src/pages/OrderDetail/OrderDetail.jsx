@@ -6,12 +6,16 @@ import axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
 import { ORDER_PAY_RESET } from "../../redux/actionType/orderTypes";
 import Moment from "moment";
+import { deliverOrder, orderList } from "../../redux/action/adminAction";
+import { ORDER_DELIVER_RESET } from "../../redux/actionType/adminTypes";
 
 function OrderDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const orderDetails = useSelector((state) => state.detailOrder.detail);
   const orderPay = useSelector((state) => state.payReducer);
+  const user = useSelector((state) => state.login.user);
+  const orderDeliver = useSelector((state) => state.deliverOrder);
 
   const [sdkReady, setSdkReady] = useState(false);
 
@@ -28,8 +32,13 @@ function OrderDetail() {
       document.body.appendChild(script);
     };
 
-    if ((orderDetails && !orderDetails._id) || orderPay.success) {
+    if (
+      orderPay.success ||
+      orderDeliver.success ||
+      (orderDetails && orderDetails._id !== id)
+    ) {
       dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetail(id));
     } else {
       if (orderDetails && !orderDetails.isPaid) {
@@ -40,10 +49,14 @@ function OrderDetail() {
         }
       }
     }
-  }, [dispatch, id, orderDetails, sdkReady, orderPay]);
+  }, [dispatch, id, orderDetails, sdkReady, orderPay, orderDeliver]);
 
   const paymentSuccessHandler = (paymentResult) => {
     dispatch(payOrder(orderDetails, paymentResult));
+  };
+
+  const deliverOrderHandler = (id) => {
+    dispatch(deliverOrder(id));
   };
 
   return (
@@ -84,13 +97,15 @@ function OrderDetail() {
                 : ""}
             </p>
             {orderDetails && orderDetails.isDelivered ? (
-              <div>
-                <p>
+              <div className="success-bg">
+                <h4 className="col-success">
                   Delivered at{" "}
                   {orderDetails && orderDetails.deliveredAt
-                    ? orderDetails.deliveredAt
+                    ? Moment(orderDetails.deliveredAt).format(
+                        "DD MMMM YYYY, hh:mm a"
+                      )
                     : ""}
-                </p>
+                </h4>
               </div>
             ) : (
               <div className="danger-bg">
@@ -197,6 +212,15 @@ function OrderDetail() {
                 )}
               </div>
             )}
+            {user.isAdmin &&
+              orderDetails?.isPaid &&
+              !orderDetails?.isDelivered && (
+                <div>
+                  <button onClick={() => deliverOrderHandler(orderDetails._id)}>
+                    Deliver Order
+                  </button>
+                </div>
+              )}
           </div>
         </div>
       </div>
@@ -205,5 +229,3 @@ function OrderDetail() {
 }
 
 export default OrderDetail;
-
-// || (orderDetails && orderDetails._id) !== id
