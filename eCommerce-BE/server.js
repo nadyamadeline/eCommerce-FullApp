@@ -39,10 +39,16 @@ app.get("/api/config/paypal", (req, res) => {
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
-// set the root of our server
-app.get("/", (req, res) => {
-  res.send("Server is ready");
+// connect to FE build
+app.use(express.static(path.join(__dirname, "eCommerce-FE/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "eCommerce-FE/build/index.html"));
 });
+
+// set the root of our server
+// app.get("/", (req, res) => {
+//   res.send("Server is ready");
+// });
 
 // display error message (error catcher)
 app.use((err, req, res, next) => {
