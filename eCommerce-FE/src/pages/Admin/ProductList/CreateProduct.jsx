@@ -1,20 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createProduct } from "../../../redux/action/adminAction";
 import "./CreateProduct.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const CreateProduct = () => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
-  const [image, setimage] = useState("");
+  const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
   const [inStock, setInStock] = useState("");
   const [description, setDescription] = useState("");
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const productCreate = useSelector((state) => state.createProduct);
+
   const submitHandler = () => {
     const body = {
       name: name,
@@ -27,6 +31,37 @@ const CreateProduct = () => {
     };
     dispatch(createProduct(body));
     history.push(`/admin/productList`);
+  };
+
+  // useEffect(() => {
+  //   if (productCreate.success) {
+  //     history.push(`/admin/productList`);
+  //   }
+  // }, [productCreate]);
+
+  // upload image
+  const [loadingImage, setLoadingImage] = useState(false);
+  const [errorImage, setErrorImage] = useState("");
+  const user = useSelector((state) => state.login.user);
+  const uploadImageHandler = async (e) => {
+    let file = e.target.files[0];
+    let formData = new FormData();
+    formData.append("image", file);
+    setLoadingImage(true);
+
+    try {
+      const { data } = await axios.post("/api/uploads", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setImage(data);
+      setLoadingImage(false);
+    } catch (error) {
+      setErrorImage(error.message);
+      setLoadingImage(false);
+    }
   };
   return (
     <div className="createProduct">
@@ -72,9 +107,19 @@ const CreateProduct = () => {
             <br />
             <input
               type="text"
-              required
+              disabled
               placeholder="/images/img.jpeg"
-              onChange={(e) => setimage(e.target.value)}
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            />
+          </div>
+          <div style={{ marginTop: "1rem" }}>
+            <label htmlFor="">Upload Image</label>
+            <br />
+            <input
+              type="file"
+              label="Choose Image"
+              onChange={uploadImageHandler}
             />
           </div>
           <div style={{ marginTop: "1rem" }}>

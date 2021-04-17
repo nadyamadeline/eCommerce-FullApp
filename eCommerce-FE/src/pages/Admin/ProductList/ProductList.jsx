@@ -2,16 +2,27 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { productLists } from "../../../redux/action/productListAction";
 import { Link } from "react-router-dom";
+import { deleteProduct } from "../../../redux/action/adminAction";
+import { PRODUCT_DELETE_RESET } from "../../../redux/actionType/adminTypes";
 
 const ProductList = () => {
   const productList = useSelector((state) => state.productReducer);
   const products = productList.products;
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(productLists());
-  }, [dispatch]);
 
-  const deleteProductHandler = () => {};
+  const productDelete = useSelector((state) => state.deleteProduct);
+  useEffect(() => {
+    if (productDelete.success) {
+      dispatch({ type: PRODUCT_DELETE_RESET });
+    }
+    dispatch(productLists());
+  }, [dispatch, productDelete]);
+
+  const deleteProductHandler = (id) => {
+    if (window.confirm("Are you sure to delete?")) {
+      dispatch(deleteProduct(id));
+    }
+  };
   return (
     <div className="order-history">
       <div
@@ -23,9 +34,7 @@ const ProductList = () => {
       >
         <h1>Products</h1>
         <Link to={`/admin/products/create`}>
-          <button style={{ padding: "12px 16px", fontSize: "16px" }}>
-            Create Product
-          </button>
+          <button className="createProduct-btn">Create Product</button>
         </Link>
       </div>
       {productList.loading ? (
@@ -72,7 +81,11 @@ const ProductList = () => {
                           </button>
                         </Link>
 
-                        <button onClick={deleteProductHandler}>Delete</button>
+                        <button
+                          onClick={() => deleteProductHandler(product._id)}
+                        >
+                          Delete
+                        </button>
                       </div>
                     </td>
                   </tr>

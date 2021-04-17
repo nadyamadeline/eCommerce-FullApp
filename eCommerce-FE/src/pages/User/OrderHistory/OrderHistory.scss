@@ -20,6 +20,30 @@ $infoBkgr: #e0e0ff;
     // margin-bottom: 2rem;
     color: $darkbrown;
   }
+
+  .createProduct-btn {
+    padding: 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Open Sans";
+    background-color: $darkbrown;
+    color: $cream;
+    cursor: pointer;
+
+    border: 1px solid $lightbrown;
+    // transition-timing-function: ease-in;
+    // transition: all 1s;
+    cursor: pointer;
+    &:hover {
+      // transition-timing-function: ease-in;
+      // transition: all 1s;
+      background-color: $cream;
+      color: $darkbrown;
+    }
+    &:focus {
+      outline: 0;
+    }
+  }
 }
 
 table {

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { updateProduct } from "../../../redux/action/adminAction";
 import { PRODUCT_UPDATE_RESET } from "../../../redux/actionType/adminTypes";
+import axios from "axios";
 
 const CreateProduct = () => {
   const { id } = useParams();
@@ -12,7 +13,7 @@ const CreateProduct = () => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
-  const [image, setimage] = useState("");
+  const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
   const [inStock, setInStock] = useState("");
   const [description, setDescription] = useState("");
@@ -24,21 +25,25 @@ const CreateProduct = () => {
   const history = useHistory();
   useEffect(() => {
     if (productUpdate.success) {
-      dispatch({ type: PRODUCT_UPDATE_RESET });
       history.push("/admin/productList");
     }
-    if (product && !product.name) {
+    if (
+      (product && !product.name) ||
+      product._id !== id ||
+      productUpdate.success
+    ) {
+      dispatch({ type: PRODUCT_UPDATE_RESET });
       dispatch(productDetail(id));
     } else {
       setName(product.name);
       setCategory(product.category);
       setBrand(product.brand);
-      setimage(product.image);
+      setImage(product.image);
       setPrice(product.price);
       setInStock(product.countInStock);
       setDescription(product.description);
     }
-  }, [dispatch, product, productUpdate]);
+  }, [dispatch, product, productUpdate, history, id]);
 
   const editHandler = (e) => {
     e.preventDefault();
@@ -52,6 +57,31 @@ const CreateProduct = () => {
       description: description,
     };
     dispatch(updateProduct(id, body));
+  };
+
+  // upload image
+  const [loadingImage, setLoadingImage] = useState(false);
+  const [errorImage, setErrorImage] = useState("");
+  const user = useSelector((state) => state.login.user);
+  const uploadImageHandler = async (e) => {
+    let file = e.target.files[0];
+    let formData = new FormData();
+    formData.append("image", file);
+    setLoadingImage(true);
+
+    try {
+      const { data } = await axios.post("/api/uploads", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setImage(data);
+      setLoadingImage(false);
+    } catch (error) {
+      setErrorImage(error.message);
+      setLoadingImage(false);
+    }
   };
   return (
     <div className="createProduct">
@@ -100,10 +130,19 @@ const CreateProduct = () => {
             <br />
             <input
               type="text"
-              required
+              disabled
               placeholder="/images/img.jpeg"
-              onChange={(e) => setimage(e.target.value)}
+              onChange={(e) => setImage(e.target.value)}
               value={image}
+            />
+          </div>
+          <div style={{ marginTop: "1rem" }}>
+            <label htmlFor="">Upload Image</label>
+            <br />
+            <input
+              type="file"
+              label="Choose Image"
+              onChange={uploadImageHandler}
             />
           </div>
           <div style={{ marginTop: "1rem" }}>

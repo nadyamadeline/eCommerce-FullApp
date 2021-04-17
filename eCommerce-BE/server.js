@@ -4,6 +4,8 @@ import UserRouter from "./routers/user.js"; // in server-side programming, we ne
 import ProductRouter from "./routers/product.js";
 import dotenv from "dotenv";
 import orderRouter from "./routers/order.js";
+import uploadRouter from "./routers/upload.js";
+import path from "path";
 
 dotenv.config();
 const app = express();
@@ -15,6 +17,9 @@ mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/canopyco", {
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
+
+// upload image
+app.use("/api/uploads", uploadRouter);
 
 // show sample user
 app.use("/api/users", UserRouter);
@@ -29,6 +34,10 @@ app.use("/api/orders", orderRouter);
 app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || "sb");
 });
+
+// display image in FE
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 // set the root of our server
 app.get("/", (req, res) => {
