@@ -5,6 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "cd eCommerce-FE && npm install && npm run build",
     "start": "nodemon --watch eCommerce-BE --exec node --experimental-modules eCommerce-BE/server.js"
   },
   "author": "",
@@ -21,5 +22,6 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
-  }
+  },
+  "engines": {"node": "12.4.0", "npm":"6.9.0"}
 }
