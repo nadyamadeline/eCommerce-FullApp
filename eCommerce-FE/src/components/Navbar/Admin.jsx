@@ -22,6 +22,9 @@ function User() {
             </h2>
           </div>
           <div className="hero-dropdown-content">
+            <Link to={`/admin/profile`} style={{ textDecoration: "none" }}>
+              <p>Profile</p>
+            </Link>
             <Link to={`/admin/dashboard`} style={{ textDecoration: "none" }}>
               <p>Dashboard</p>
             </Link>

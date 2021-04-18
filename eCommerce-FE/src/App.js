@@ -19,6 +19,8 @@ import AdminProduct from "./pages/Admin/ProductList/ProductList";
 import CreateProduct from "./pages/Admin/ProductList/CreateProduct";
 import EditProduct from "./pages/Admin/ProductList/EditProduct";
 import OrderList from "./pages/Admin/OrderList/OrderList";
+import UserList from "./pages/Admin/UserList/UserList";
+import CreateAdmin from "./pages/Admin/UserList/CreateAdmin";
 
 function App() {
   return (
@@ -41,6 +43,8 @@ function App() {
           <AdminRoute path="/admin/products/create" component={CreateProduct} />
           <AdminRoute path="/products/:id/edit" component={EditProduct} />
           <AdminRoute path="/admin/orderList" component={OrderList} />
+          <AdminRoute path="/admin/userList" component={UserList} />
+          <AdminRoute path="/admin/users/create" component={CreateAdmin} />
         </Switch>
         <Footer />
       </div>

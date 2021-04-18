@@ -21,6 +21,9 @@ import {
   orderListReducer,
   deleteOrderReducer,
   orderDeliverReducer,
+  userListReducer,
+  deleteUserReducer,
+  createAdminReducer,
 } from "./adminReducer";
 
 const rootReducer = combineReducers({
@@ -41,6 +44,9 @@ const rootReducer = combineReducers({
   orderList: orderListReducer,
   deleteOrder: deleteOrderReducer,
   deliverOrder: orderDeliverReducer,
+  userList: userListReducer,
+  deleteUser: deleteUserReducer,
+  createAdmin: createAdminReducer,
 });
 
 export default rootReducer;

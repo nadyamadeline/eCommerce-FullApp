@@ -43,7 +43,7 @@ function Navbar() {
 
         {userInfo ? (
           <div style={{ display: "flex" }}>
-            <User />
+            {!userInfo.isAdmin ? <User /> : ""}
             {userInfo.isAdmin ? <Admin /> : ""}
           </div>
         ) : (

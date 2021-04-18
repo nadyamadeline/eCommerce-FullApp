@@ -17,6 +17,15 @@ import {
   ORDER_DELIVER_REQUEST,
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_FAIL,
+  USER_LIST_FAIL,
+  USER_LIST_REQUEST,
+  USER_LIST_SUCCESS,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAIL,
+  ADMIN_CREATE_REQUEST,
+  ADMIN_CREATE_SUCCESS,
+  ADMIN_CREATE_FAIL,
 } from "../actionType/adminTypes";
 import axios from "axios";
 
@@ -177,6 +186,91 @@ export const deliverOrder = (id) => async (dispatch, getState) => {
   } catch (err) {
     dispatch({
       type: ORDER_DELIVER_FAIL,
+      payload:
+        err.message && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};
+
+export const userList = () => async (dispatch, getState) => {
+  dispatch({ type: USER_LIST_REQUEST });
+  try {
+    const {
+      login: { user },
+    } = getState();
+    const { data } = await axios.get(`/api/users`, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+    dispatch({
+      type: USER_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (err) {
+    dispatch({
+      type: USER_LIST_FAIL,
+      payload:
+        err.message && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};
+
+export const deleteUser = (id) => async (dispatch, getState) => {
+  dispatch({ type: USER_DELETE_REQUEST, payload: id });
+  try {
+    const {
+      login: { user },
+    } = getState();
+    const { data } = await axios.delete(`/api/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+    dispatch({
+      type: USER_DELETE_SUCCESS,
+    });
+  } catch (err) {
+    dispatch({
+      type: USER_DELETE_FAIL,
+      payload:
+        err.message && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};
+
+export const createAdmin = (body) => async (dispatch, getState) => {
+  dispatch({
+    type: ADMIN_CREATE_REQUEST,
+    payload: body,
+  });
+  try {
+    const {
+      login: { user },
+    } = getState();
+    const { data } = await axios.post("/api/users/admin", body, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+    dispatch({
+      type: ADMIN_CREATE_SUCCESS,
+      payload: data,
+    });
+    // dispatch({
+    //   type: USER_LOGIN_SUCCESS,
+    //   payload: data,
+    // });
+    // localStorage.setItem("userInfo", JSON.stringify(data));
+  } catch (err) {
+    dispatch({
+      type: ADMIN_CREATE_FAIL,
       payload:
         err.message && err.response.data.message
           ? err.response.data.message

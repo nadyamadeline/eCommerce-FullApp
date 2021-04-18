@@ -17,17 +17,19 @@ const Profile = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isSeller, setIsSeller] = useState(false);
 
-  // const updateProfile = useSelector((state) => state.updateProfile);
-  // console.log(name);
+  const updateProfile = useSelector((state) => state.updateProfile);
+  // console.log(isSeller);
 
   useEffect(() => {
-    if (!detailUser) {
+    if (!detailUser || updateProfile.success) {
       dispatch({ type: USER_UPDATE_RESET });
       dispatch(userDetail(userInfo._id));
     } else {
       setName(detailUser.name);
       setEmail(detailUser.email);
+      setIsSeller(detailUser.isSeller);
     }
   }, [dispatch, userInfo, detailUser]);
 
@@ -38,12 +40,12 @@ const Profile = () => {
       name,
       email,
       password,
+      isSeller,
     };
     if (password !== confirmPassword) {
       alert("Password does not match.");
     } else {
       dispatch(updateUserProfile(body));
-      window.location.reload();
     }
   };
   return (
@@ -109,7 +111,21 @@ const Profile = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
+          <br />
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <input
+              type="checkbox"
+              style={{ width: "20px" }}
+              value={isSeller}
+              checked={isSeller}
+              onChange={(e) => setIsSeller(!isSeller)}
+            />
+            <label htmlFor="" style={{ marginLeft: "1rem" }}>
+              Enable seller view
+            </label>
+          </div>
         </div>
+
         <br />
 
         <div style={{ display: "flex", justifyContent: "center" }}>

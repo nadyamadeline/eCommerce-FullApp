@@ -4,7 +4,7 @@ import data from "../data.js";
 import expressAsyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs";
 import { generateToken } from "./utils.js";
-import { isAuth } from "../routers/utils.js";
+import { isAuth, isAdmin } from "../routers/utils.js";
 
 // this is to make routing modular instead of all in server.js
 const userRouter = express.Router();
@@ -79,6 +79,7 @@ userRouter.put(
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
+      user.isSeller = req.body.isSeller;
       if (req.body.password) {
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
@@ -90,9 +91,56 @@ userRouter.put(
       name: updatedUser.name,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
+      isSeller: updatedUser.isSeller,
       token: generateToken(updatedUser),
     });
   })
 );
 
+userRouter.get(
+  "/",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const users = await User.find({});
+    res.send(users);
+  })
+);
+
+userRouter.delete(
+  "/:id",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      const deletedUser = await user.remove();
+      res.send({ message: "User deleted", user: deletedUser });
+    } else {
+      res.status(404).send({ message: "User not found" });
+    }
+  })
+);
+
+userRouter.post(
+  "/admin",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const admin = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password, 8),
+      isAdmin: true,
+    });
+    const createdAdmin = await admin.save();
+    res.send({
+      _id: createdAdmin.id,
+      name: createdAdmin.name,
+      email: createdAdmin.email,
+      isAdmin: createdAdmin.isAdmin,
+      token: generateToken(createdAdmin),
+    });
+  })
+);
 export default userRouter;
