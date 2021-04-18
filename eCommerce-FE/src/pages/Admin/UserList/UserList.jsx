@@ -31,7 +31,7 @@ const UserList = () => {
         }}
       >
         <h1>Users</h1>
-        <Link to={`/admin/users/create`}>
+        <Link to={`/admin/create`}>
           <button className="createProduct-btn">Create Admin</button>
         </Link>
       </div>

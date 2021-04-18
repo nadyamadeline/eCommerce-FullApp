@@ -1,11 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./User.scss";
 import { signOut } from "../../redux/action/userAction";
 import { useHistory, Link } from "react-router-dom";
 
 function User() {
-  // const userInfo = useSelector((state) => state.login.user);
+  const userInfo = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
   const history = useHistory();
   const handleSignOut = () => {
@@ -18,7 +18,7 @@ function User() {
         <li className="hero-dropdown">
           <div className="hero-profile-container">
             <h2 className="hero-dropbtn">
-              <p>Admin</p>
+              <p>{userInfo.name}</p>
             </h2>
           </div>
           <div className="hero-dropdown-content">
