@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 import { deleteProduct } from "../../../redux/action/adminAction";
 import { PRODUCT_DELETE_RESET } from "../../../redux/actionType/adminTypes";
 
-const ProductList = () => {
+const ProductList = (props) => {
+  const sellerMode = props.match.path.indexOf("/seller") >= 0;
+  // console.log(sellerMode);
   const productList = useSelector((state) => state.productReducer);
+  const userInfo = useSelector((state) => state.login.user);
   const products = productList.products;
   const dispatch = useDispatch();
 
@@ -15,8 +18,8 @@ const ProductList = () => {
     if (productDelete.success) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
-    dispatch(productLists());
-  }, [dispatch, productDelete]);
+    dispatch(productLists({ seller: sellerMode ? userInfo._id : "" }));
+  }, [dispatch, productDelete, sellerMode, userInfo]);
 
   const deleteProductHandler = (id) => {
     if (window.confirm("Are you sure to delete?")) {

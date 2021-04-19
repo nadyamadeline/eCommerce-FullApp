@@ -2,16 +2,21 @@ import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Order from "../models/order.js";
 import Product from "../models/product.js";
-import { isAuth, isAdmin } from "../routers/utils.js";
+import { isAuth, isAdmin, isSellerOrAdmin } from "../routers/utils.js";
 
 const orderRouter = express.Router();
 
 orderRouter.get(
   "/",
   isAuth,
-  isAdmin,
+  isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
-    const order = await Order.find({}).populate("user", "name"); // populate is like join in SQL
+    const seller = req.query.seller || "";
+    const sellerFilter = seller ? { seller } : {};
+    const order = await Order.find({ ...sellerFilter }).populate(
+      "user",
+      "name"
+    ); // populate is like join in SQL
     res.send(order);
   })
 );
@@ -34,6 +39,7 @@ orderRouter.post(
       res.status(400).send({ message: "Shipping address is empty" });
     } else {
       const order = new Order({
+        seller: req.body.orderItems[0].seller,
         orderItems: req.body.orderItems,
         shippingInfo: req.body.shippingInfo,
         paymentMethod: req.body.paymentMethod,

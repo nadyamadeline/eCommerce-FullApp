@@ -22,6 +22,11 @@ const Profile = () => {
   const updateProfile = useSelector((state) => state.updateProfile);
   // console.log(isSeller);
 
+  // Seller
+  const [sellerName, setSellerName] = useState("");
+  // const [sellerLogo, setSellerLogo] = useState("");
+  const [sellerDescription, setSellerDescription] = useState("");
+
   useEffect(() => {
     if (!detailUser || updateProfile.success) {
       dispatch({ type: USER_UPDATE_RESET });
@@ -30,8 +35,13 @@ const Profile = () => {
       setName(detailUser.name);
       setEmail(detailUser.email);
       setIsSeller(detailUser.isSeller);
+      if (userInfo.seller) {
+        setSellerName(userInfo.seller.name);
+        // setSellerLogo(userInfo.seller.logo);
+        setSellerDescription(userInfo.seller.description);
+      }
     }
-  }, [dispatch, userInfo, detailUser]);
+  }, [dispatch, userInfo, detailUser, updateProfile]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -41,6 +51,8 @@ const Profile = () => {
       email,
       password,
       isSeller,
+      sellerName,
+      sellerDescription,
     };
     if (password !== confirmPassword) {
       alert("Password does not match.");
@@ -48,8 +60,9 @@ const Profile = () => {
       dispatch(updateUserProfile(body));
     }
   };
+
   return (
-    <div className="login">
+    <div className="createProduct">
       <form onSubmit={submitHandler}>
         <div>
           <h1>My Profile</h1>
@@ -96,7 +109,7 @@ const Profile = () => {
             <br />
             <input
               type="password"
-              required
+              // required
               placeholder="******"
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -106,7 +119,7 @@ const Profile = () => {
             <br />
             <input
               type="password"
-              required
+              // required
               placeholder="******"
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
@@ -125,11 +138,56 @@ const Profile = () => {
             </label>
           </div>
         </div>
-
+        <br />
+        <hr />
         <br />
 
+        {isSeller || userInfo.isSeller ? (
+          <div>
+            <label>
+              <h1>Shop</h1>
+              <div style={{ marginTop: "1rem" }}>
+                <label htmlFor="">Shop Name</label>
+                <br />
+                <input
+                  type="text"
+                  placeholder="My Store"
+                  required
+                  onChange={(e) => setSellerName(e.target.value)}
+                  value={sellerName}
+                />
+              </div>
+              {/* <div style={{ marginTop: "1rem" }}>
+                <label htmlFor="">Logo</label>
+                <br />
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="My Store"
+                  required
+                  onChange={(e) => setSellerLogo(e.target.value)}
+                  value={sellerLogo}
+                />
+              </div> */}
+              <div style={{ marginTop: "1rem" }}>
+                <label htmlFor="">Description</label>
+                <br />
+                <input
+                  type="text"
+                  placeholder="Tableware specialist"
+                  required
+                  onChange={(e) => setSellerDescription(e.target.value)}
+                  value={sellerDescription}
+                />
+              </div>
+            </label>
+          </div>
+        ) : (
+          ""
+        )}
+
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <button type="submit" style={{ marginTop: "1rem" }}>
+          <button type="submit" style={{ marginTop: "2rem" }}>
             Edit Profile
           </button>
         </div>

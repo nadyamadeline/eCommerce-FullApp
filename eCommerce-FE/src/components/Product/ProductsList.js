@@ -10,7 +10,7 @@ function ProductCard() {
   const productList = useSelector((state) => state.productReducer);
 
   useEffect(() => {
-    dispatch(productLists());
+    dispatch(productLists({}));
   }, [dispatch]);
 
   return (

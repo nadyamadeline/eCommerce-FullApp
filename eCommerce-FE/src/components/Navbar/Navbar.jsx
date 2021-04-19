@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import User from "./User";
 import Admin from "./Admin";
+import Seller from "./Seller";
 
 function Navbar() {
   const cart = useSelector((state) => state.cart.cartItem);
   const userInfo = useSelector((state) => state.login.user);
+  // const userDetail = useSelector((state) => state.userDetail.userData);
   let totalItem = cart.reduce((a, c) => a + Number(c.qty), 0);
 
   // scroll effect
@@ -43,7 +45,9 @@ function Navbar() {
 
         {userInfo ? (
           <div style={{ display: "flex" }}>
+            {userInfo.isSeller ? <Seller /> : ""}
             {!userInfo.isAdmin ? <User /> : ""}
+
             {userInfo.isAdmin ? <Admin /> : ""}
           </div>
         ) : (

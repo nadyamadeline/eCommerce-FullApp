@@ -22,6 +22,7 @@ import OrderList from "./pages/Admin/OrderList/OrderList";
 import UserList from "./pages/Admin/UserList/UserList";
 import CreateAdmin from "./pages/Admin/UserList/CreateAdmin";
 import ProfileAdmin from "./pages/Admin/Profile/ProfileAdmin";
+import SellerRoute from "./components/PrivateRoute/SellerRoute";
 
 function App() {
   return (
@@ -41,12 +42,18 @@ function App() {
           <PrivateRoute path="/user/orders" component={OrderHistory} />
           <PrivateRoute path="/user/profile" component={Profile} />
           <AdminRoute path="/admin/productList" component={AdminProduct} />
+          <SellerRoute
+            path="/admin/products/create"
+            component={CreateProduct}
+          />
           <AdminRoute path="/admin/products/create" component={CreateProduct} />
           <AdminRoute path="/products/:id/edit" component={EditProduct} />
           <AdminRoute path="/admin/orderList" component={OrderList} />
           <AdminRoute path="/admin/userList" component={UserList} />
           <AdminRoute path="/admin/create" component={CreateAdmin} />
           <AdminRoute path="/admin/profile" component={ProfileAdmin} />
+          <SellerRoute path="/seller/products" component={AdminProduct} />
+          <SellerRoute path="/seller/orders" component={OrderList} />
         </Switch>
         <Footer />
       </div>

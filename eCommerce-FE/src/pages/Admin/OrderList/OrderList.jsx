@@ -5,16 +5,19 @@ import { Link } from "react-router-dom";
 import Moment from "moment";
 import { ORDER_DELETE_RESET } from "../../../redux/actionType/adminTypes";
 
-const OrderList = () => {
+const OrderList = (props) => {
+  const sellerMode = props.match.path.indexOf("/seller") >= 0;
+  // console.log(sellerMode);
   const listOrder = useSelector((state) => state.orderList);
   const orders = listOrder.order;
   const orderDelete = useSelector((state) => state.deleteOrder);
+  const userInfo = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
   useEffect(() => {
     if (orderDelete.success) {
       dispatch({ type: ORDER_DELETE_RESET });
     }
-    dispatch(orderList());
+    dispatch(orderList({ seller: sellerMode ? userInfo._id : "" }));
   }, [dispatch, orderDelete]);
 
   const deleteOrderHandler = (id) => {

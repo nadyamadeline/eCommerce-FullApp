@@ -6,7 +6,7 @@ import axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
 import { ORDER_PAY_RESET } from "../../redux/actionType/orderTypes";
 import Moment from "moment";
-import { deliverOrder, orderList } from "../../redux/action/adminAction";
+import { deliverOrder } from "../../redux/action/adminAction";
 import { ORDER_DELIVER_RESET } from "../../redux/actionType/adminTypes";
 
 function OrderDetail() {

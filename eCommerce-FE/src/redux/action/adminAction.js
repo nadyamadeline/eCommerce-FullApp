@@ -89,7 +89,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
     const {
       login: { user },
     } = getState();
-    const { data } = await axios.delete(`/api/products/${id}`, {
+    await axios.delete(`/api/products/${id}`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
@@ -108,13 +108,13 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
   }
 };
 
-export const orderList = () => async (dispatch, getState) => {
+export const orderList = ({ seller = "" }) => async (dispatch, getState) => {
   dispatch({ type: ORDER_LIST_REQUEST });
   try {
     const {
       login: { user },
     } = getState();
-    const { data } = await axios.get(`/api/orders`, {
+    const { data } = await axios.get(`/api/orders?seller=${seller}`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
@@ -226,7 +226,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     const {
       login: { user },
     } = getState();
-    const { data } = await axios.delete(`/api/users/${id}`, {
+    await axios.delete(`/api/users/${id}`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
