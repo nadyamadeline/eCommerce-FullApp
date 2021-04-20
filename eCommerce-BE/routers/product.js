@@ -10,8 +10,13 @@ productRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
     const seller = req.query.seller || "";
+    const name = req.query.name || "";
     const sellerFilter = seller ? { seller } : {};
-    const products = await Product.find({ ...sellerFilter });
+    const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
+    const products = await Product.find({
+      ...sellerFilter,
+      ...nameFilter,
+    }).populate("seller", "seller.name seller.logo seller.description");
     res.send(products);
   })
 );
@@ -28,7 +33,10 @@ productRouter.get(
 productRouter.get(
   "/:id",
   expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate(
+      "seller",
+      "seller.name seller.logo seller.rating"
+    );
     if (product) {
       res.send(product);
     } else {

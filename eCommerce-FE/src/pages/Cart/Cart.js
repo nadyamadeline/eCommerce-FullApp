@@ -19,6 +19,17 @@ function Cart() {
     history.push(`/signin?redirect=shipping`);
   };
 
+  const sellers = cart.map((x) => x.seller?._id);
+  let sellersDictionary = {};
+  for (let i = 0; i < sellers.length; i++) {
+    let current = sellers[i];
+    if (sellersDictionary[current]) {
+      sellersDictionary[current]++;
+    } else {
+      sellersDictionary[current] = 1;
+    }
+  }
+  // console.log(Object.keys(sellersDictionary).length);
   return (
     <div className="cart">
       <h1 style={{ marginBottom: "2rem" }}>Shopping Cart</h1>
@@ -41,7 +52,14 @@ function Cart() {
           <div key={index} className="cart-items">
             <div className="cart-image" style={{ width: "30%" }}>
               <img src={item.image} alt={item.name} />
-              <p style={{ marginLeft: "2rem" }}>{item.name}</p>
+              <div>
+                <p style={{ marginLeft: "2rem" }}>{item.name}</p>
+                <Link to={`/seller/${item.seller?._id}`}>
+                  <p style={{ marginLeft: "2rem", fontSize: "14px" }}>
+                    {item.seller?.seller.name}
+                  </p>
+                </Link>
+              </div>
             </div>
             <div className="cart-set-qty" style={{ width: "25%" }}>
               <button
@@ -81,6 +99,15 @@ function Cart() {
           </div>
         ))
       )}
+      {Object.keys(sellersDictionary).length > 1 ? (
+        <div className="danger-bg">
+          <p className="col-danger">
+            Please checkout for items from one seller only.
+          </p>
+        </div>
+      ) : (
+        ""
+      )}
       <div className="cart-total">
         <h3>
           Total{" "}
@@ -95,7 +122,12 @@ function Cart() {
         </p>
       </div>
       <div className="cart-checkout">
-        <button onClick={handleCheckOut}>Checkout</button>
+        <button
+          onClick={handleCheckOut}
+          disabled={Object.keys(sellersDictionary).length > 1}
+        >
+          Checkout
+        </button>
       </div>
     </div>
   );

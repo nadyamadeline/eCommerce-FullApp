@@ -18,7 +18,7 @@ const OrderList = (props) => {
       dispatch({ type: ORDER_DELETE_RESET });
     }
     dispatch(orderList({ seller: sellerMode ? userInfo._id : "" }));
-  }, [dispatch, orderDelete]);
+  }, [dispatch, orderDelete, sellerMode, userInfo]);
 
   const deleteOrderHandler = (id) => {
     if (window.confirm("Are you sure to delete?")) {

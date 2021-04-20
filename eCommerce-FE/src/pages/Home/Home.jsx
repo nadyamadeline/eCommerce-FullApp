@@ -16,7 +16,7 @@ function Home() {
       <div className="featured">
         <h2>Our Products</h2>
 
-        <ProductsList />
+        <ProductsList seller="" />
       </div>
     </div>
   );

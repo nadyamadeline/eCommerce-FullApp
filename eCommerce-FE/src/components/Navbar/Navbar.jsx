@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import User from "./User";
 import Admin from "./Admin";
 import Seller from "./Seller";
+import SearchBox from "../SearchBox/SearchBox";
 
 function Navbar() {
   const cart = useSelector((state) => state.cart.cartItem);
@@ -30,6 +31,9 @@ function Navbar() {
           <p>canopy &amp; co.</p>
         </div>
       </Link>
+      <div>
+        <SearchBox />
+      </div>
       {/* <div className="nav-tabs">
         <h2>Shop</h2>
         <h2>About</h2>

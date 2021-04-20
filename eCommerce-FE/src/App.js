@@ -23,6 +23,10 @@ import UserList from "./pages/Admin/UserList/UserList";
 import CreateAdmin from "./pages/Admin/UserList/CreateAdmin";
 import ProfileAdmin from "./pages/Admin/Profile/ProfileAdmin";
 import SellerRoute from "./components/PrivateRoute/SellerRoute";
+import Seller from "./pages/Seller/Seller";
+import SellerOrAdminRoute from "./components/PrivateRoute/SellerOrAdminRoute";
+import PublicSeller from "./pages/Seller/PublicSeller";
+import Search from "./pages/Search/Search";
 
 function App() {
   return (
@@ -31,7 +35,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/products/:id" component={ProductDetail} />
+          <Route path="/search/:name?" component={Search} />
           <Route path="/cart" component={Cart} />
           <Route path="/signin" component={Login} />
           <Route path="/register" component={Register} />
@@ -42,18 +46,24 @@ function App() {
           <PrivateRoute path="/user/orders" component={OrderHistory} />
           <PrivateRoute path="/user/profile" component={Profile} />
           <AdminRoute path="/admin/productList" component={AdminProduct} />
-          <SellerRoute
-            path="/admin/products/create"
+          <SellerOrAdminRoute
+            path="/products/create"
             component={CreateProduct}
           />
-          <AdminRoute path="/admin/products/create" component={CreateProduct} />
-          <AdminRoute path="/products/:id/edit" component={EditProduct} />
           <AdminRoute path="/admin/orderList" component={OrderList} />
           <AdminRoute path="/admin/userList" component={UserList} />
           <AdminRoute path="/admin/create" component={CreateAdmin} />
           <AdminRoute path="/admin/profile" component={ProfileAdmin} />
-          <SellerRoute path="/seller/products" component={AdminProduct} />
+          <SellerRoute exact path="/seller/products" component={AdminProduct} />
           <SellerRoute path="/seller/orders" component={OrderList} />
+          <SellerRoute
+            path="/seller/products/create"
+            component={CreateProduct}
+          />
+          <SellerRoute path="/seller/profile/:id" component={Seller} />
+          <Route exact path="/seller/:id" component={PublicSeller} />
+          <Route exact path="/products/:id" component={ProductDetail} />
+          <AdminRoute path="/products/:id/edit" component={EditProduct} />
         </Switch>
         <Footer />
       </div>

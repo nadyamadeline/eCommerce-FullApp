@@ -5,6 +5,7 @@ import { productDetail } from "../../redux/action/productDetailAction";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../../redux/action/cartAction";
 import ReactStars from "react-stars";
+import { Link } from "react-router-dom";
 
 function ProductDetail() {
   // get product detail
@@ -41,6 +42,11 @@ function ProductDetail() {
           <img src={product.image} alt={product.name} className="detail-img" />
           <div className="detail-info">
             <h2>{product.name}</h2>
+            <Link to={`/seller/${product.seller?._id}`}>
+              <p style={{ marginTop: "1rem", fontWeight: "600" }}>
+                {product && product.seller && product.seller.seller.name}
+              </p>
+            </Link>
             <div className="product-rating">
               <ReactStars
                 count={5}

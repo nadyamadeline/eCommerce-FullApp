@@ -47,7 +47,23 @@ function ProductCard() {
                     {product.rating} ({product.numReviews} sold)
                   </p>
                 </div>
-                <p className="product-price">${product.price}</p>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <p className="product-price">${product.price}</p>
+                  <Link
+                    to={`/seller/${product.seller._id}`}
+                    style={{ fontSize: "14px" }}
+                  >
+                    <p style={{ paddingRight: "0.5rem" }}>
+                      {product.seller.seller.name}
+                    </p>
+                  </Link>
+                </div>
               </div>
             </div>
           </Link>

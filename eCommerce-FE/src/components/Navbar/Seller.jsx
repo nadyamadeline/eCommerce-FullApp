@@ -1,11 +1,11 @@
 import React from "react";
-// import { useDispatch useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "./User.scss";
 // import { signOut } from "../../redux/action/userAction";
 import { Link } from "react-router-dom";
 
 function Seller() {
-  //   const userInfo = useSelector((state) => state.login.user);
+  const userInfo = useSelector((state) => state.login.user);
   //   const dispatch = useDispatch();
   //   const history = useHistory();
   //   const handleSignOut = () => {
@@ -22,6 +22,12 @@ function Seller() {
             </h2>
           </div>
           <div className="hero-dropdown-content">
+            <Link
+              to={`/seller/profile/${userInfo._id}`}
+              style={{ textDecoration: "none" }}
+            >
+              <p>Shop</p>
+            </Link>
             <Link to={`/seller/products`} style={{ textDecoration: "none" }}>
               <p>Products</p>
             </Link>

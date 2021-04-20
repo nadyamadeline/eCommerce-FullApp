@@ -5,12 +5,16 @@ import {
 } from "../actionType/productListTypes";
 import axios from "axios";
 
-export const productLists = ({ seller = "" }) => async (dispatch) => {
+export const productLists = ({ seller = "", name = "" }) => async (
+  dispatch
+) => {
   dispatch({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
-    const { data } = await axios.get(`/api/products?seller=${seller}`);
+    const { data } = await axios.get(
+      `/api/products?seller=${seller}&name=${name}`
+    );
     dispatch({
       type: PRODUCT_LIST_SUCCESS,
       payload: data,

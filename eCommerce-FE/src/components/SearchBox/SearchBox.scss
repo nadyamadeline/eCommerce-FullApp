@@ -1,0 +1,47 @@
+$black: #404142;
+$darkbrown: #4c4036;
+$lightbrown: #77706a;
+$grey: #d8d7d4;
+$beige: #e3d6cb;
+$cream: #fef9f3;
+$success: #20a020;
+$successBkgr: #eeffe0;
+$danger: #a02020;
+$dangerBkgr: #ffe0e0;
+$info: #2020a0;
+$infoBkgr: #e0e0ff;
+
+.search-box {
+  color: $black;
+  input {
+    font-family: "Open Sans";
+    background-color: transparent;
+    border: 1px solid $lightbrown;
+    width: 400px;
+    height: 1.25rem;
+    border-radius: 3px;
+    padding: 0.3rem 0.5rem;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+div.search-not-found {
+  margin-top: 3rem;
+  font-weight: 600;
+}
+
+.search-page {
+  display: flex;
+  // align-items: center;
+
+  // justify-content: space-between;
+  .search-category {
+    padding: 1rem;
+    background-color: #ffffff;
+    margin-top: 2rem;
+    padding-right: 5rem;
+    margin-right: 2rem;
+  }
+}

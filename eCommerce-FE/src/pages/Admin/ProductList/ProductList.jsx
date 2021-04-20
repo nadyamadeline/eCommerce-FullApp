@@ -36,7 +36,7 @@ const ProductList = (props) => {
         }}
       >
         <h1>Products</h1>
-        <Link to={`/admin/products/create`}>
+        <Link to={`/products/create`}>
           <button className="createProduct-btn">Create Product</button>
         </Link>
       </div>

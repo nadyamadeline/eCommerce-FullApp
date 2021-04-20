@@ -196,22 +196,25 @@ function OrderDetail() {
                 ? orderDetails.totalPrice
                 : ""}
             </p>
-            {orderDetails && !orderDetails.isPaid && (
-              <div>
-                {!sdkReady ? (
-                  <p>Loading...</p>
-                ) : (
-                  <PayPalButton
-                    amount={
-                      orderDetails && orderDetails.totalPrice
-                        ? orderDetails.totalPrice
-                        : 0
-                    }
-                    onSuccess={paymentSuccessHandler}
-                  />
-                )}
-              </div>
-            )}
+            {!user.isAdmin &&
+              user._id !== orderDetails?.seller &&
+              orderDetails &&
+              !orderDetails.isPaid && (
+                <div>
+                  {!sdkReady ? (
+                    <p>Loading...</p>
+                  ) : (
+                    <PayPalButton
+                      amount={
+                        orderDetails && orderDetails.totalPrice
+                          ? orderDetails.totalPrice
+                          : 0
+                      }
+                      onSuccess={paymentSuccessHandler}
+                    />
+                  )}
+                </div>
+              )}
             {user.isAdmin &&
               orderDetails?.isPaid &&
               !orderDetails?.isDelivered && (
