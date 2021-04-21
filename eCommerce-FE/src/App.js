@@ -63,7 +63,10 @@ function App() {
           <SellerRoute path="/seller/profile/:id" component={Seller} />
           <Route exact path="/seller/:id" component={PublicSeller} />
           <Route exact path="/products/:id" component={ProductDetail} />
-          <AdminRoute path="/products/:id/edit" component={EditProduct} />
+          <SellerOrAdminRoute
+            path="/products/:id/edit"
+            component={EditProduct}
+          />
         </Switch>
         <Footer />
       </div>

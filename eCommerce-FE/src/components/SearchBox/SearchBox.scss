@@ -34,14 +34,38 @@ div.search-not-found {
 
 .search-page {
   display: flex;
-  // align-items: center;
 
-  // justify-content: space-between;
   .search-category {
     padding: 1rem;
     background-color: #ffffff;
     margin-top: 2rem;
-    padding-right: 5rem;
+    padding-right: 4rem;
     margin-right: 2rem;
+
+    button {
+      width: 140px;
+      margin-top: 1rem;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: "Open Sans";
+      background-color: $darkbrown;
+      color: $cream;
+      border: 1px solid $darkbrown;
+      padding: 0.5rem 1rem;
+      transition-timing-function: ease-in;
+      transition: all 0.5s;
+      cursor: pointer;
+
+      &:hover {
+        transition-timing-function: ease-in;
+        transition: all 0.5s;
+
+        background-color: $cream;
+        color: $darkbrown;
+      }
+      &:focus {
+        outline: 0;
+      }
+    }
   }
 }

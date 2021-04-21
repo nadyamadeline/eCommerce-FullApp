@@ -37,3 +37,6 @@ Content-Type: application/json
     "description": "Lovely pink plate with gold lining"
   
 }
+
+###
+GET http://localhost:5000/api/products/categories

@@ -175,25 +175,25 @@ function OrderDetail() {
             <p>
               <span>Items:</span> $
               {orderDetails && orderDetails.itemsPrice
-                ? orderDetails.itemsPrice
+                ? orderDetails.itemsPrice.toFixed(2)
                 : ""}
             </p>
             <p>
               <span>Shipping:</span> $
               {orderDetails && typeof orderDetails.shippingPrice !== undefined
-                ? orderDetails.shippingPrice
+                ? orderDetails.shippingPrice.toFixed(2)
                 : ""}
             </p>
             <p>
               <span>Tax:</span> $
               {orderDetails && orderDetails.taxPrice
-                ? orderDetails.taxPrice
+                ? orderDetails.taxPrice.toFixed(2)
                 : ""}
             </p>
             <p style={{ fontSize: "20px" }}>
               <span>Total:</span> $
               {orderDetails && orderDetails.totalPrice
-                ? orderDetails.totalPrice
+                ? orderDetails.totalPrice.toFixed(2)
                 : ""}
             </p>
             {!user.isAdmin &&

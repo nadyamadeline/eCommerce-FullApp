@@ -16,7 +16,7 @@ const CreateProduct = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const userInfo = useSelector((state) => state.login.user);
   const productCreate = useSelector((state) => state.createProduct);
 
   const submitHandler = () => {
@@ -30,7 +30,11 @@ const CreateProduct = () => {
       description: description,
     };
     dispatch(createProduct(body));
-    history.push(`/admin/productList`);
+    if (!userInfo.isAdmin) {
+      history.push(`/seller/products`);
+    } else {
+      history.push(`/admin/productList`);
+    }
   };
 
   // useEffect(() => {

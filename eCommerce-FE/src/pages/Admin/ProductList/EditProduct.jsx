@@ -20,12 +20,17 @@ const CreateProduct = () => {
 
   const product = useSelector((state) => state.productDetailReducer.product);
   const productUpdate = useSelector((state) => state.updateProduct);
+  const userInfo = useSelector((state) => state.login.user);
 
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
     if (productUpdate.success) {
-      history.push("/admin/productList");
+      if (userInfo.isAdmin) {
+        history.push("/admin/productList");
+      } else {
+        history.push("/seller/products");
+      }
     }
     if (
       (product && !product.name) ||

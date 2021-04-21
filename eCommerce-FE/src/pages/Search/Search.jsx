@@ -1,25 +1,47 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import ReactStars from "react-stars";
-import { productLists } from "../../redux/action/productListAction";
+import {
+  productLists,
+  productCategoryLists,
+} from "../../redux/action/productListAction";
 
 const Search = () => {
   const { name = "all" } = useParams();
   //   console.log(name);
   const productList = useSelector((state) => state.productReducer);
+  const category = useSelector((state) => state.productCategory.category);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(productLists({ name: name !== "all" ? name : "" }));
+    dispatch(productCategoryLists());
   }, [dispatch, name]);
+
+  // filter
+  // const [isClicked, setIsClicked] = useState();
+  const [filter, setFilter] = useState();
+  const filterCheck = (item) => {
+    setFilter(item);
+  };
+
+  useEffect(() => {
+    dispatch(
+      productLists({
+        category: filter ? filter : "",
+        name: name !== "all" ? name : "",
+      })
+    );
+    dispatch(productCategoryLists());
+  }, [dispatch, filter, name]);
   return (
     <div className="sellerPage">
       <div>
         {/* <h1>{productList.products[0]?.seller.seller.name}</h1>
         <p>{productList.products[0]?.seller.seller.description}</p> */}
         <h1>
-          {productList.products?.length == 0
+          {productList.products?.length === 0
             ? "No"
             : productList.products?.length}{" "}
           {productList.products?.length <= 1 ? "result" : "results"} for{" "}
@@ -29,7 +51,24 @@ const Search = () => {
       </div>
       <div className="search-page">
         <div className="search-category">
-          <h2>Category</h2>
+          <h2>Categories</h2>
+          {category &&
+            category.map((cat, index) => (
+              <div
+                key={index}
+                className="filters"
+                style={{ paddingTop: "1rem" }}
+              >
+                <input
+                  type="checkbox"
+                  onChange={() => filterCheck(cat)}
+                  checked={filter === cat}
+                  style={{ marginRight: "0.5rem" }}
+                />
+                <label htmlFor="">{cat}</label>
+              </div>
+            ))}
+          <button onClick={() => setFilter()}>Remove Filter</button>
         </div>
         <div className="products-container">
           {productList.loading ? (
