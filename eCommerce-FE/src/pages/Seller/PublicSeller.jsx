@@ -34,6 +34,9 @@ const PublicSeller = () => {
     setRatingFilter(item);
   };
 
+  // sort
+  const [order, setOrder] = useState("newest");
+
   useEffect(() => {
     dispatch(
       productLists({
@@ -42,19 +45,34 @@ const PublicSeller = () => {
         min: priceFilter && priceFilter?.min ? priceFilter?.min : 0,
         max: priceFilter && priceFilter?.max ? priceFilter?.max : 0,
         rating: ratingFilter ? ratingFilter : 0,
+        order: order ? order : "newest",
       })
     );
     dispatch(productCategoryLists());
-  }, [dispatch, filter, id, priceFilter, ratingFilter]);
+  }, [dispatch, filter, id, priceFilter, ratingFilter, order]);
 
   return (
     <div className="sellerPage">
-      <div>
-        <h1>{productList.products[0]?.seller.seller.name}</h1>
-        <p>{productList.products[0]?.seller.seller.description}</p>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
+          <h1>{productList.products[0]?.seller.seller.name}</h1>
+          <p>{productList.products[0]?.seller.seller.description}</p>
+        </div>
+        <div>
+          <select
+            style={{ width: "250px", height: "2rem", fontSize: "1rem" }}
+            value={order}
+            onChange={(e) => setOrder(e.target.value)}
+          >
+            <option value="newest">Newest Arrival</option>
+            <option value="topRated">Top Rated</option>
+            <option value="lowest">Price: Low to High</option>
+            <option value="highest">Price: High to Low</option>
+          </select>
+        </div>
       </div>
       <div className="search-page">
-        <div className="search-category" style={{ maxWidth: "420px" }}>
+        <div className="search-category" style={{ width: "400px" }}>
           <div>
             <h2>Category</h2>
             {category &&

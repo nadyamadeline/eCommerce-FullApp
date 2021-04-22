@@ -50,8 +50,6 @@ const Search = () => {
   return (
     <div className="sellerPage">
       <div>
-        {/* <h1>{productList.products[0]?.seller.seller.name}</h1>
-        <p>{productList.products[0]?.seller.seller.description}</p> */}
         <h1>
           {productList.products?.length === 0
             ? "No"
@@ -144,7 +142,7 @@ const Search = () => {
             <p>Loading...</p>
           ) : productList.error ? (
             <p>{productList.error}</p>
-          ) : productList.products.length > 0 ? (
+          ) : (
             productList.products &&
             productList.products.map((product, index) => (
               <Link
@@ -193,10 +191,6 @@ const Search = () => {
                 </div>
               </Link>
             ))
-          ) : (
-            <div className="search-not-found">
-              <p>Product not found</p>
-            </div>
           )}
         </div>
       </div>
