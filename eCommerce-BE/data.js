@@ -26,6 +26,7 @@ const data = {
       brand: "Vinotti",
       rating: 4.7,
       description: "Lovely pink blush sofa",
+      seller: "607b1a593cddab000402e464",
     },
     {
       name: "MODENA Table",
@@ -37,6 +38,7 @@ const data = {
       brand: "Cellini",
       rating: 4.7,
       description: "Aesthetic pink coffee table",
+      seller: "607b1a593cddab000402e464",
     },
     {
       name: "ERICA Table",
@@ -48,6 +50,7 @@ const data = {
       brand: "Jakomo",
       rating: 4.9,
       description: "Natural beige marble table",
+      seller: "607b1a593cddab000402e464",
     },
     {
       name: "ALENA Chair",
@@ -59,6 +62,7 @@ const data = {
       brand: "Lumiere",
       rating: 4.5,
       description: "Simple transparent chair",
+      seller: "607b1a593cddab000402e464",
     },
     {
       name: "CARRIE Plate",
@@ -70,6 +74,7 @@ const data = {
       brand: "Bellagio",
       rating: 4.3,
       description: "Blue ceramic plate with gold spots",
+      seller: "607b1a593cddab000402e464",
     },
   ],
 };
