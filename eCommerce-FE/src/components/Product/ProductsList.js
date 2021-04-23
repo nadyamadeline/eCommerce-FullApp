@@ -23,28 +23,28 @@ function ProductCard() {
         productList.products &&
         productList.products.map((product, index) => (
           <Link
-            to={`/products/${product._id}`}
+            to={`/products/${product?._id}`}
             key={index}
             style={{ textDecoration: "none" }}
           >
             <div className="products">
               <div className="product-img">
-                <img src={product.image} alt={product.name} />
+                <img src={product?.image} alt={product?.name} />
               </div>
               <div className="product-info">
                 <p className="product-name" style={{ fontSize: "1.15rem" }}>
-                  {product.name.toUpperCase()}
+                  {product?.name.toUpperCase()}
                 </p>
                 <div className="product-rating">
                   <ReactStars
                     count={5}
-                    value={product.rating}
+                    value={product?.rating}
                     size={16}
                     color2={"#fff200"}
                     edit={false}
                   />
                   <p>
-                    {product.rating} ({product.numReviews} sold)
+                    {product?.rating} ({product?.numReviews} sold)
                   </p>
                 </div>
                 <div
@@ -54,13 +54,13 @@ function ProductCard() {
                     alignItems: "center",
                   }}
                 >
-                  <p className="product-price">${product.price}</p>
+                  <p className="product-price">${product?.price}</p>
                   <Link
-                    to={`/seller/${product.seller._id}`}
+                    to={`/seller/${product.seller?._id}`}
                     style={{ fontSize: "14px" }}
                   >
                     <p style={{ paddingRight: "0.5rem" }}>
-                      {product.seller.seller.name}
+                      {product.seller.seller?.name}
                     </p>
                   </Link>
                 </div>
