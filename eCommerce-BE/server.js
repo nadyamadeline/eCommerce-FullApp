@@ -7,7 +7,6 @@ import orderRouter from "./routers/order.js";
 import uploadRouter from "./routers/upload.js";
 import path from "path";
 import config from "./config.js";
-import { Storage } from "@google-cloud/storage";
 
 // dotenv.config();
 const app = express();
