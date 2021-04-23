@@ -34,7 +34,9 @@ productRouter.get(
         ? { price: -1 }
         : order.toLowerCase() === "toprated"
         ? { rating: -1 }
-        : { _id: -1 };
+        : order === "newest"
+        ? { _id: -1 }
+        : "";
 
     const products = await Product.find({
       ...sellerFilter,

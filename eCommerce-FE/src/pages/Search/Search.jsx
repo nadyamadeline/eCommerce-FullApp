@@ -38,18 +38,49 @@ const Search = () => {
     setRatingFilter(item);
   };
 
+  // sort
+  const [order, setOrder] = useState("newest");
+
   useEffect(() => {
     dispatch(
       productLists({
         category: filter ? filter : "",
         name: name !== "all" ? name : "",
+        min: priceFilter && priceFilter?.min ? priceFilter?.min : 0,
+        max: priceFilter && priceFilter?.max ? priceFilter?.max : 0,
+        rating: ratingFilter ? ratingFilter : 0,
+        order: order ? order : "newest",
       })
     );
     dispatch(productCategoryLists());
-  }, [dispatch, filter, name]);
+  }, [dispatch, filter, name, priceFilter, ratingFilter, order]);
   return (
     <div className="sellerPage">
-      <div>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
+          <h1>
+            {productList.products?.length === 0
+              ? "No"
+              : productList.products?.length}{" "}
+            {productList.products?.length <= 1 ? "result" : "results"} for{" "}
+            <span style={{ fontStyle: "italic" }}>'{name}'</span>
+            ...
+          </h1>
+        </div>
+        <div>
+          <select
+            style={{ width: "250px", height: "2rem", fontSize: "1rem" }}
+            value={order}
+            onChange={(e) => setOrder(e.target.value)}
+          >
+            <option value="newest">Newest Arrival</option>
+            <option value="topRated">Top Rated</option>
+            <option value="lowest">Price: Low to High</option>
+            <option value="highest">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+      {/* <div>
         <h1>
           {productList.products?.length === 0
             ? "No"
@@ -58,7 +89,7 @@ const Search = () => {
           <span style={{ fontStyle: "italic" }}>'{name}'</span>
           ...
         </h1>
-      </div>
+      </div> */}
       <div className="search-page">
         <div className="search-category">
           <div>

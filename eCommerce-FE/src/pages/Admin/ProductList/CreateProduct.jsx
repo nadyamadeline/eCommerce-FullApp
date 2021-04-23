@@ -3,7 +3,8 @@ import { createProduct } from "../../../redux/action/adminAction";
 import "./CreateProduct.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
+import { app } from "../../../firebase/firebaseConfig";
 
 const CreateProduct = () => {
   const [name, setName] = useState("");
@@ -37,35 +38,51 @@ const CreateProduct = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (productCreate.success) {
-  //     history.push(`/admin/productList`);
-  //   }
-  // }, [productCreate]);
+  useEffect(() => {
+    if (productCreate.success) {
+      if (userInfo.isAdmin) {
+        history.push(`/admin/productList`);
+      } else {
+        history.push(`/seller/products`);
+      }
+    }
+  }, [productCreate, history, userInfo]);
 
   // upload image
-  const [loadingImage, setLoadingImage] = useState(false);
-  const [errorImage, setErrorImage] = useState("");
-  const user = useSelector((state) => state.login.user);
-  const uploadImageHandler = async (e) => {
-    let file = e.target.files[0];
-    let formData = new FormData();
-    formData.append("image", file);
-    setLoadingImage(true);
+  // const [loadingImage, setLoadingImage] = useState(false);
+  // const [errorImage, setErrorImage] = useState("");
+  // const user = useSelector((state) => state.login.user);
 
-    try {
-      const { data } = await axios.post("/api/uploads", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
-      setImage(data);
-      setLoadingImage(false);
-    } catch (error) {
-      setErrorImage(error.message);
-      setLoadingImage(false);
-    }
+  // const uploadImageHandler = async (e) => {
+  //   let file = e.target.files[0];
+  //   let formData = new FormData();
+  //   formData.append("image", file);
+  //   setLoadingImage(true);
+
+  //   try {
+  //     const { data } = await axios.post("/api/uploads", formData, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //         Authorization: `Bearer ${user.token}`,
+  //       },
+  //     });
+  //     setImage(data);
+  //     setLoadingImage(false);
+  //   } catch (error) {
+  //     setErrorImage(error.message);
+  //     setLoadingImage(false);
+  //   }
+  // };
+
+  // firebase
+
+  const onChangeHandler = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = app.storage().ref();
+    const fileRef = storageRef.child(file.name);
+
+    await fileRef.put(file);
+    setImage(await fileRef.getDownloadURL());
   };
   return (
     <div className="createProduct">
@@ -120,10 +137,15 @@ const CreateProduct = () => {
           <div style={{ marginTop: "1rem" }}>
             <label htmlFor="">Upload Image</label>
             <br />
-            <input
+            {/* <input
               type="file"
               label="Choose Image"
               onChange={uploadImageHandler}
+            /> */}
+            <input
+              type="file"
+              label="Choose Image"
+              onChange={onChangeHandler}
             />
           </div>
           <div style={{ marginTop: "1rem" }}>
