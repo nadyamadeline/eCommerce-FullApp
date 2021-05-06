@@ -30,7 +30,7 @@ const Profile = () => {
       setEmail(detailUser.email);
       //   setIsSeller(detailUser.isSeller);
     }
-  }, [dispatch, userInfo, detailUser, updateProfile]);
+  }, [dispatch, userInfo, detailUser, updateProfile.success]);
 
   const submitHandler = (e) => {
     e.preventDefault();

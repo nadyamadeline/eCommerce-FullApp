@@ -2,6 +2,10 @@ import {
   PRODUCT_DETAIL_FAIL,
   PRODUCT_DETAIL_REQUEST,
   PRODUCT_DETAIL_SUCCESS,
+  REVIEW_CREATE_FAIL,
+  REVIEW_CREATE_REQUEST,
+  REVIEW_CREATE_RESET,
+  REVIEW_CREATE_SUCCESS,
 } from "../actionType/productDetailTypes";
 
 const initialState = {
@@ -10,7 +14,7 @@ const initialState = {
   error: "",
 };
 
-const productDetailReducer = (state = initialState, action) => {
+export const productDetailReducer = (state = initialState, action) => {
   switch (action.type) {
     case PRODUCT_DETAIL_REQUEST:
       return {
@@ -36,4 +40,17 @@ const productDetailReducer = (state = initialState, action) => {
   }
 };
 
-export default productDetailReducer;
+export const createReviewReducer = (state = {}, action) => {
+  switch (action.type) {
+    case REVIEW_CREATE_REQUEST:
+      return { loading: true };
+    case REVIEW_CREATE_SUCCESS:
+      return { loading: false, success: true, review: action.payload };
+    case REVIEW_CREATE_FAIL:
+      return { loading: false, error: action.payload };
+    case REVIEW_CREATE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};

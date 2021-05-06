@@ -8,6 +8,9 @@ import { ORDER_PAY_RESET } from "../../redux/actionType/orderTypes";
 import Moment from "moment";
 import { deliverOrder } from "../../redux/action/adminAction";
 import { ORDER_DELIVER_RESET } from "../../redux/actionType/adminTypes";
+import "./OrderDetail.scss";
+import { createReview } from "../../redux/action/productDetailAction";
+import { REVIEW_CREATE_RESET } from "../../redux/actionType/productDetailTypes";
 
 function OrderDetail() {
   const { id } = useParams();
@@ -58,6 +61,26 @@ function OrderDetail() {
   const deliverOrderHandler = (id) => {
     dispatch(deliverOrder(id));
   };
+
+  // rate order
+  const [rating, setRating] = useState(0);
+  const [review, setReview] = useState("");
+
+  const createReviews = useSelector((state) => state.createReview);
+  const submitReview = (e) => {
+    e.preventDefault();
+    if (rating && review) {
+      const body = { rating: rating, review: review, name: user.name };
+      dispatch(createReview(id, body));
+    }
+  };
+
+  useEffect(() => {
+    if (createReviews.success) {
+      window.alert("Review submitted!");
+      dispatch({ type: REVIEW_CREATE_RESET });
+    }
+  }, [createReviews.success, dispatch]);
 
   return (
     <div className="review-container">
@@ -225,6 +248,42 @@ function OrderDetail() {
                 </div>
               )}
           </div>
+          <br />
+          {orderDetails?.isDelivered ? (
+            <div className="rateOrder">
+              <h2>Rate Your Order!</h2>
+              <form action="" onSubmit={submitReview}>
+                <div>
+                  <select
+                    name=""
+                    id=""
+                    value={rating}
+                    onChange={(e) => setRating(e.target.value)}
+                  >
+                    <option value="" disabled selected>
+                      Select...
+                    </option>
+                    <option value="">5 - Excellent</option>
+                    <option value="">4 - Very Good</option>
+                    <option value="">3 - Good</option>
+                    <option value="">2 - Fair</option>
+                    <option value="">1 - Poor</option>
+                  </select>
+                </div>
+                <div>
+                  <textarea
+                    name=""
+                    id=""
+                    value={review}
+                    onChange={(e) => setReview(e.target.value)}
+                  ></textarea>
+                </div>
+                <button>Submit</button>
+              </form>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

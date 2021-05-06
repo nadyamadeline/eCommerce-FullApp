@@ -41,7 +41,7 @@ const Profile = () => {
         setSellerDescription(userInfo.seller.description);
       }
     }
-  }, [dispatch, userInfo, detailUser, updateProfile]);
+  }, [dispatch, userInfo, detailUser, updateProfile.success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
